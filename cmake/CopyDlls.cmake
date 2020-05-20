@@ -8,14 +8,6 @@ macro(CopyDlls)
             COMMAND ${CMAKE_COMMAND} -E copy
                 "${FREEIMAGE_DEBUG_DIR}/FreeImaged.dll" 
                 "${FREEIMAGE_DEBUG_DIR}/FreeImagePlusd.dll" 
-                "${MKL_ROOT_DIR}/lib/mkl_core.dll"
-                "${MKL_ROOT_DIR}/lib/mkl_sequential.dll"
-                "${MKL_ROOT_DIR}/lib/mkl_avx2.dll"
-                "${MKL_ROOT_DIR}/lib/mkl_def.dll"
-                "${DAAL_ROOT_DIR}/bin/daal_core.dll"
-                "${DAAL_ROOT_DIR}/bin/daal_thread.dll"
-                "${DAAL_ROOT_DIR}/bin/tbb.dll"
-                "${DAAL_ROOT_DIR}/bin/tbbmalloc.dll"
                 "${CMAKE_BINARY_DIR}/bin/Debug/"
         )
         
@@ -26,14 +18,6 @@ macro(CopyDlls)
             COMMAND ${CMAKE_COMMAND} -E copy
             "${FREEIMAGE_RELEASE_DIR}/FreeImage.dll" 
             "${FREEIMAGE_RELEASE_DIR}/FreeImagePlus.dll" 
-            "${MKL_ROOT_DIR}/lib/mkl_core.dll"
-            "${MKL_ROOT_DIR}/lib/mkl_sequential.dll"
-            "${MKL_ROOT_DIR}/lib/mkl_avx2.dll"
-            "${MKL_ROOT_DIR}/lib/mkl_def.dll"
-            "${DAAL_ROOT_DIR}/bin/daal_core.dll"
-            "${DAAL_ROOT_DIR}/bin/daal_thread.dll"
-            "${DAAL_ROOT_DIR}/bin/tbb.dll"
-            "${DAAL_ROOT_DIR}/bin/tbbmalloc.dll"
             "${CMAKE_BINARY_DIR}/bin/Release/"
         )
         
@@ -44,14 +28,6 @@ macro(CopyDlls)
             COMMAND ${CMAKE_COMMAND} -E copy
             "${FREEIMAGE_RELEASE_DIR}/FreeImage.dll" 
             "${FREEIMAGE_RELEASE_DIR}/FreeImagePlus.dll" 
-            "${MKL_ROOT_DIR}/lib/mkl_core.dll"
-            "${MKL_ROOT_DIR}/lib/mkl_sequential.dll"
-            "${MKL_ROOT_DIR}/lib/mkl_avx2.dll"
-            "${MKL_ROOT_DIR}/lib/mkl_def.dll"
-            "${DAAL_ROOT_DIR}/bin/daal_core.dll"
-            "${DAAL_ROOT_DIR}/bin/daal_thread.dll"
-            "${DAAL_ROOT_DIR}/bin/tbb.dll"
-            "${DAAL_ROOT_DIR}/bin/tbbmalloc.dll"
             "${CMAKE_BINARY_DIR}/bin/RelWithDebug/"
         )
 
