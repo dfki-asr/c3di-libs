@@ -21,14 +21,14 @@ macro(CopyDlls)
             "${CMAKE_BINARY_DIR}/bin/Release/"
         )
         
-        file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/bin/RelWithDebug/")
+        file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/bin/RelWithDebInfo/")
         add_custom_command(
             TARGET ${PROJECT_NAME} 
             POST_BUILD
             COMMAND ${CMAKE_COMMAND} -E copy
             "${FREEIMAGE_RELEASE_DIR}/FreeImage.dll" 
             "${FREEIMAGE_RELEASE_DIR}/FreeImagePlus.dll" 
-            "${CMAKE_BINARY_DIR}/bin/RelWithDebug/"
+            "${CMAKE_BINARY_DIR}/bin/RelWithDebInfo/"
         )
 
     endif(MSVC)
