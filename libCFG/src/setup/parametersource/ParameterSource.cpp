@@ -87,7 +87,7 @@ namespace ettention
     TVECTOR ParameterSource::getVectorParameter(std::string aName) const
     {
         std::string buffer = replaceCommasWithSpaces(getStringParameter(aName));
-        std::istringstream stream(aName);
+        std::istringstream stream(buffer);
         TVECTOR result;
         stream >> result;
         return result;

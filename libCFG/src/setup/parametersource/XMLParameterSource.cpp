@@ -69,10 +69,10 @@ namespace ettention
     void XMLParameterSource::parse()
     {
         std::ifstream ifs(xmlFilename);
-        std::string file_content( (std::istreambuf_iterator<char>(ifs)),
-                                  (std::istreambuf_iterator<char>() ));
+        xmlFileContent = std::string( (std::istreambuf_iterator<char>(ifs)),
+                                      (std::istreambuf_iterator<char>() ));
 
-        xml_document.parse<0>( &file_content[0] );
+        xml_document.parse<0>( &xmlFileContent[0] );
     }
 
     std::filesystem::path XMLParameterSource::extendRelativeToXMLPath(std::filesystem::path path) const

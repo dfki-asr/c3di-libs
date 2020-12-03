@@ -21,6 +21,7 @@ namespace ettention
         std::filesystem::path extendRelativeToXMLPath(std::filesystem::path path) const;
 
         std::string xmlFilename;
+        std::string xmlFileContent;
         rapidxml::xml_document<> xml_document;
     };
 }
