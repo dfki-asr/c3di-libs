@@ -29,7 +29,7 @@ find_package(Dependencies)
 add_subdirectory(memoryManager)
 
 # lib MMV
-add_subdirectory(libmmv)
+add_subdirectory(libMMV)
 
 # lib Thread Pool
 add_subdirectory(libThreadPool)
