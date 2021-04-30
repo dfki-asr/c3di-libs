@@ -18,6 +18,9 @@ generate_source_tree(HOST_SOURCES "${DIRS}" "${FILE_TYPES}")
 if(MSVC)
 	# export all symbols for a shared library
 	set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS 1)
+	add_definitions(/D_USE_MATH_DEFINES) # // Define _USE_MATH_DEFINES before including <math.h> to expose these macro # // definitions for common math constants. 
+	add_definitions(/DNOMINMAX) # use Min() Max()
+
 endif(MSVC)
 add_library(${LIBMMV_LIBRARY_NAME} SHARED ${HOST_SOURCES})
 
