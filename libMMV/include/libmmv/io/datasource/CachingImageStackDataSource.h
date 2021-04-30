@@ -1,19 +1,20 @@
 #pragma once
-#include <unordered_map>
 #include <list>
+#include <unordered_map>
+#include "libmmv/io/HyperStackIndex.h"
 #include "libmmv/io/datasource/ImageStackDataSource.h"
 
 namespace libmmv
 {
     class Image;
-    class HyperStackIndex;
+    class Visualizer;
 
     class CachingImageStackDataSource : public ImageStackDataSource
     {
     public:
         static const unsigned int INFINITE_CACHED_IMAGES = (unsigned int)-1;
 
-        CachingImageStackDataSource(unsigned int maxCachedImages = 16);
+        CachingImageStackDataSource(unsigned int maxCachedImages = 8192);
         virtual ~CachingImageStackDataSource();
 
         Image* loadProjectionImage(const HyperStackIndex& index) override;

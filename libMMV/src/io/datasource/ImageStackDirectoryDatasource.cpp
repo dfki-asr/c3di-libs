@@ -35,22 +35,22 @@ namespace libmmv
 
     Image* ImageStackDirectoryDataSource::loadImageFromLocation(const ImageLocation& location) {
         Image* img = 0;
-        std::string fpath = getAbsoluteImageLocation(location.getPath());
+        std::filesystem::path fpath = getAbsoluteImageLocation(location.getPath());
 
         if (location.isInsideImageStack())
         {
-            img = ImageDeserializer::readImageFromStack(fpath, location.getIndexInImageStack());
+            img = ImageDeserializer::readImageFromStack(fpath.string(), location.getIndexInImageStack());
         }
         else
         {
-            img = ImageDeserializer::readImage(fpath);
+            img = ImageDeserializer::readImage(fpath.string());
         }
         return img;
     }
 
-    std::string ImageStackDirectoryDataSource::getAbsoluteImageLocation( const std::string& location )
+    std::filesystem::path ImageStackDirectoryDataSource::getAbsoluteImageLocation( const std::filesystem::path& location )
     {
-        return directory +"/"+ location;
+        return directory / location.string();
     }
 
     std::vector<HyperStackIndex> ImageStackDirectoryDataSource::collectAllValidIndices() const
@@ -98,13 +98,13 @@ namespace libmmv
     {
     }
 
-    ImageStackDirectoryDataSource::ImageLocation::ImageLocation(const std::string& path, unsigned int indexInImageStack)
+    ImageStackDirectoryDataSource::ImageLocation::ImageLocation(const std::filesystem::path& path, unsigned int indexInImageStack)
         : path(path)
         , indexInImageStack(indexInImageStack)
     {
     }
 
-    const std::string& ImageStackDirectoryDataSource::ImageLocation::getPath() const
+    const std::filesystem::path& ImageStackDirectoryDataSource::ImageLocation::getPath() const
     {
         return path;
     }
@@ -118,7 +118,7 @@ namespace libmmv
     {
         if(!this->isInsideImageStack())
         {
-            throw std::ios_base::failure("path " + path + " points directly to an image and not a stack of images");
+            throw std::ios_base::failure("path " + path.string() + " points directly to an image and not a stack of images");
         }
         return indexInImageStack;
     }

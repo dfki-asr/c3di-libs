@@ -1,4 +1,3 @@
-#define _USE_MATH_DEFINES
 #include <math.h>
 #include <cstring>
 #include "libmmv/math/Matrix4x4.h"

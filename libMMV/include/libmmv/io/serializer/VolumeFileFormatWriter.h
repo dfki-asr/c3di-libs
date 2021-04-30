@@ -1,6 +1,7 @@
 #pragma once
 #include <stdio.h>
-#include <memory>
+#include <filesystem>
+
 #include "libmmv/io/IOEnumerations.h"
 
 namespace libmmv
@@ -19,7 +20,7 @@ namespace libmmv
         virtual bool canGenerateRotation(CoordinateOrder rotation) = 0;
         virtual std::string getFileExtension() = 0;
 
-        virtual void write(Volume* volume, std::string outputVolumeFileName, VoxelValueType mode, CoordinateOrder order, bool invert = false);
+        virtual void write(Volume* volume, std::filesystem::path outputVolumeFileName, VoxelValueType mode, CoordinateOrder order, bool invert = false);
 
 
     protected:

@@ -1,7 +1,5 @@
-#include "libmmv/model/image/Image.h"
 #include <cassert>
-#include <numeric>
-#include <sstream>
+#include "libmmv/model/image/Image.h"
 
 namespace libmmv
 {
@@ -14,10 +12,11 @@ namespace libmmv
     Image::Image(const Vec2ui& resolution, const float* initialData)
         : resolution(resolution)
     {
-        if (resolution.x * resolution.y == 0) {
-            std::stringstream err;
-            err << "Invalid image size: " << resolution;
-            throw std::domain_error(err.str());
+        if (resolution.x * resolution.y == 0)
+        {
+            std::stringstream description;
+            description << "Invalid image size: " << resolution;
+            throw std::domain_error( description.str() );
         }
 
 		data.resize(resolution.x * resolution.y);
@@ -30,6 +29,7 @@ namespace libmmv
  
     Image::~Image()
     {
+        data.clear();
     }
 
     const Vec2ui& Image::getResolution() const
@@ -89,7 +89,10 @@ namespace libmmv
 
     float Image::computeAverageValue() const
     {
-        return std::accumulate(data.begin(), data.end(), 0.0f) / (float)data.size();
+        float sum = 0.0f;
+        for (auto value : data)
+            sum += value;
+        return sum / (float) data.size();
     }
 
     float Image::findMinValue() const

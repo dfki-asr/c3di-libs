@@ -1,8 +1,7 @@
-#define _USE_MATH_DEFINES
+#include <iomanip> 
+#include <cmath>
 #include "libmmv/algorithm/NumericalAlgorithms.h"
 #include "libmmv/math/Matrix3x3.h"
-#include <cmath>
-#include <iomanip>
 
 namespace libmmv
 {
@@ -111,7 +110,7 @@ namespace libmmv
 
     void NumericalAlgorithms::assertValueIsFinite(float value)
     {
-        if (isinf(value))
+        if (!std::isfinite(value))
         {
             throw std::runtime_error("Infinite value in data!");
         }

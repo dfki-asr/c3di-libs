@@ -2,6 +2,7 @@
 #include "libmmv/model/volume/ByteVolume.h"
 #include "libmmv/model/volume/HalfFloatVolume.h"
 #include "libmmv/model/volume/FloatVolume.h"
+#include "libmmv/model/volume/VolumeProperties.h"
 #include "libmmv/io/datasource/MRCDataSource.h"
 #include "libmmv/io/datasource/ImageStackDataSource.h"
 

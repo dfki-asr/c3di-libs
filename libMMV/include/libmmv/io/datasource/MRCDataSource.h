@@ -1,4 +1,5 @@
 #pragma once
+#include <filesystem>
 #include <fstream>
 #include "libmmv/math/Vec2.h"
 #include "libmmv/io/datasource/MRCHeader.h"
@@ -11,8 +12,8 @@ namespace libmmv
 
     public:
         MRCDataSource();
-        MRCDataSource(const std::string& stackFilePath, bool logaritmizeData);
-        MRCDataSource(const std::string& stackFilePath, const std::string& tiltFilePath, bool logaritmizeData);
+        MRCDataSource(const std::filesystem::path& stackFilePath, bool logaritmizeData);
+        MRCDataSource(const std::filesystem::path& stackFilePath, const std::filesystem::path& tiltFilePath, bool logaritmizeData);
         ~MRCDataSource();
 
         Vec2ui getResolution() const override;
@@ -28,7 +29,7 @@ namespace libmmv
         float dataMin;
         float dataMax;
         bool logaritmizeData;
-        std::string stackFilePath;
+        std::filesystem::path stackFilePath;
         MRCHeader mrcHeader;
         Vec2ui resolution;
         unsigned int numberOfProjections;

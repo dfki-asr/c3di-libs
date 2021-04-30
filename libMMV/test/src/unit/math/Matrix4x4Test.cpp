@@ -1,10 +1,7 @@
-
+#include <cmath>
 #include "gtest/gtest.h"
-
 #include "libmmv/math/Matrix4x4.h"
 #include "libmmv/math/Vec4.h"
-
-#include <cmath>
 
 namespace libmmv
 {

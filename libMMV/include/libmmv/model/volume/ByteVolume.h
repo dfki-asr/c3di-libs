@@ -1,4 +1,5 @@
 #pragma once
+#include <optional>
 #include "libmmv/math/Vec3.h"
 #include "libmmv/model/volume/Voxel.h"
 #include "libmmv/model/volume/Volume.h"

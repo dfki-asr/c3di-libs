@@ -1,31 +1,36 @@
 #include <cstring>
 #include "libmmv/model/volume/ByteVolume.h"
-#include <memory>
 #include "libmmv/model/volume/Voxel.h"
 #include "libmmv/model/image/Image.h"
 
 namespace libmmv
 {
 
-    ByteVolume::ByteVolume(const Vec3ui& resolution, std::optional<float> initValue, std::optional<float> maximumInputFloatValue /*= 1.0f */)
+    ByteVolume::ByteVolume( const Vec3ui& resolution, std::optional<float> initValue, std::optional<float> maximumInputFloatValue /*= 1.0f */ )
         : Volume(Voxel::DataType::UCHAR_8, resolution, initValue)
         , maximumInputFloatValue(*maximumInputFloatValue)
     {
-        Volume::init(initValue ? 0.0f : *initValue);
+        if (!initValue.has_value())
+            Volume::init(0.0f);
+        else
+            Volume::init(*initValue);
     }
 
-    ByteVolume::ByteVolume(const Vec3ui& resolution, const BoundingBox3f& bbox, std::optional<float> initValue, std::optional<float> maximumInputFloatValue /*= 1.0f */)
+    ByteVolume::ByteVolume( const Vec3ui& resolution, const BoundingBox3f& bbox, std::optional<float> initValue, std::optional<float> maximumInputFloatValue /*= 1.0f */ )
         : Volume(Voxel::DataType::UCHAR_8, resolution, bbox, initValue)
         , maximumInputFloatValue(*maximumInputFloatValue)
     {
-        Volume::init(initValue ? 0.0f : *initValue);
+        if ( !initValue.has_value() )
+            Volume::init( 0.0f );
+        else
+            Volume::init( *initValue );
     }
 
-    ByteVolume::ByteVolume(const Vec3ui& resolution, const byte_t* initialData, std::optional<float> maximumInputFloatValue /*= 1.0f */)
-        : Volume(Voxel::DataType::UCHAR_8, resolution, std::nullopt)
+    ByteVolume::ByteVolume( const Vec3ui& resolution, const byte_t* initialData, std::optional<float> maximumInputFloatValue /*= 1.0f */ )
+        : Volume( Voxel::DataType::UCHAR_8, resolution, std::nullopt )
         , maximumInputFloatValue(*maximumInputFloatValue)
     {
-        init(initialData);
+        init( initialData );
     }
 
     ByteVolume::~ByteVolume()

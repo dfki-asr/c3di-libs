@@ -8,14 +8,14 @@ namespace libmmv
     {
     }
 
-    MRCDataSource::MRCDataSource(const std::string& stackFilePath, bool logaritmizeData)
+    MRCDataSource::MRCDataSource(const std::filesystem::path& stackFilePath, bool logaritmizeData)
         : stackFilePath(stackFilePath)
         , logaritmizeData(logaritmizeData)
     {
         init();
     }
 
-    MRCDataSource::MRCDataSource(const std::string& stackFilePath, const std::string& tiltFilePath, bool logaritmizeData)
+    MRCDataSource::MRCDataSource(const std::filesystem::path& stackFilePath, const std::filesystem::path& tiltFilePath, bool logaritmizeData)
         : stackFilePath(stackFilePath)
         , logaritmizeData(logaritmizeData)
     {
@@ -130,7 +130,7 @@ namespace libmmv
             file.read((char*)&value, sizeof(_T));
             if(!file.good())
             {
-				throw std::ios_base::failure("Error reading " + std::to_string(voxelCount) + " voxel value(s) from " + stackFilePath + "!");
+				throw std::ios_base::failure("Error reading " + std::to_string(voxelCount) + " voxel value(s) from " + stackFilePath.string() + "!");
             }
             dataMax = std::max((float)value, dataMax);
             dataMin = std::min((float)value, dataMin);
@@ -139,10 +139,11 @@ namespace libmmv
 
     void MRCDataSource::init()
     {
-        file.open(stackFilePath, std::ios::binary);
+        std::string path = stackFilePath.string();
+        file.open(path, std::ios::binary);
         if(!file.good())
         {
-            throw std::ios_base::failure("Could not open MRC stack "+ stackFilePath);
+            throw std::ios_base::failure( "Could not open MRC stack" + stackFilePath.string() );
         }
         file.read((char*)&mrcHeader, sizeof(MRCHeader));
         file.ignore(mrcHeader.extra);
@@ -164,9 +165,9 @@ namespace libmmv
             this->getDataRange<unsigned short>();
             break;
         default:
-            std::ostringstream err;
-            err << "Format of the MRC stack is either unknown or not supported (mode " << mrcHeader.mode << ")";
-            throw std::ios_base::failure(err.str());
+            std::stringstream message;
+            message << "Format of the MRC stack is either unknown or not supported (mode " << mrcHeader.mode << ")";
+            throw std::ios_base::failure( message.str() );
         }
 
         if(mrcHeader.mode == 1 || mrcHeader.mode == 2)

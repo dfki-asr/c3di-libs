@@ -1,4 +1,5 @@
 #include <cstring>
+#include <fstream>
 #include "libmmv/io/serializer/MRCWriter.h"
 #include "libmmv/io/datasource/MRCHeader.h"
 #include "libmmv/io/rangetransformation/RangeTransformation.h"
@@ -44,7 +45,7 @@ namespace libmmv
     void MRCWriter::writeHeader(std::ofstream &outfile, VolumeProperties& volumeProperties, const Vec3ui volumeResolution, RangeTransformation* rangeTransformation)
     {
         MRCHeader header;
-        std::memset(&header, 0, sizeof(MRCHeader));
+        memset(&header, 0, sizeof(MRCHeader));
 
         header.mode = currentVoxelMode;
 

@@ -1,6 +1,9 @@
 #pragma once
 
 #include <string>
+#include <iostream>
+#include <memory>
+
 #include "libmmv/model/volume/Volume.h"
 
 namespace libmmv

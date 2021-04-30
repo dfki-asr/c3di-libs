@@ -1,7 +1,7 @@
 #include "libmmv/evaluation/DistanceBetweenConsecutiveSlabs.h"
 #include "libmmv/evaluation/RootMeanSquareError.h"
 #include "libmmv/model/image/Image.h"
-#include "libmmv/model/volume/Volume.h"
+#include "libmmv/model/volume/FloatVolume.h"
 
 namespace libmmv
 {

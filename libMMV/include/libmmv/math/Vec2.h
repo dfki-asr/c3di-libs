@@ -1,8 +1,8 @@
 #pragma once
 #include <string>
 #include <algorithm>
+#include <cmath>
 #include <sstream>
-#include <math.h>
 
 namespace libmmv
 {

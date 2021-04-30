@@ -1,7 +1,7 @@
+#include <cstring>
+#include "FreeImagePlus.h"
 #include "libmmv/io/deserializer/ImageDeserializer.h"
 #include "libmmv/model/image/Image.h"
-#include "FreeImagePlus.h"
-#include <cstring>
 
 namespace libmmv
 {
@@ -58,7 +58,7 @@ namespace libmmv
         {
             // freeImage reads the images flipped vertically, so flip them back
             float* tgtPtr = image->getScanLineData(resolution.y - y - 1);
-            std::memcpy(tgtPtr, tmp.getScanLine(y), resolution.x * sizeof(float));
+            memcpy(tgtPtr, tmp.getScanLine(y), resolution.x * sizeof(float));
         }
         return image;
     }

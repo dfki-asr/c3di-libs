@@ -1,7 +1,6 @@
 #include "libmmv/algorithm/volumestatistics/VolumeStatistics.h"
+#include "libmmv/model/volume/FloatVolume.h"
 #include <limits>
-#include "libmmv/model/volume/Volume.h"
-
 namespace libmmv
 {
     VolumeStatistics::VolumeStatistics()

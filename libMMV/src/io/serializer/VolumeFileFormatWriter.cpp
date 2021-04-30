@@ -1,23 +1,23 @@
-#include "libmmv/io/serializer/VolumeFileFormatWriter.h"
 #include <fstream>
 #include "libmmv/io/rangetransformation/IdentityRangeTransformation.h"
 #include "libmmv/io/rangetransformation/LinearRangeTransformation.h"
+#include "libmmv/io/serializer/VolumeFileFormatWriter.h"
 #include "libmmv/algorithm/volumestatistics/VolumeStatistics.h"
-#include "libmmv/model/volume/Volume.h"
 #include "libmmv/model/image/Image.h"
+#include "libmmv/model/volume/FloatVolume.h"
 
 namespace libmmv
 {
 
-    void VolumeFileFormatWriter::write(Volume* volume, std::string outputVolumeFileName, VoxelValueType voxelMode, CoordinateOrder orientation, bool invert)
+    void VolumeFileFormatWriter::write(Volume* volume, std::filesystem::path outputVolumeFileName, VoxelValueType voxelMode, CoordinateOrder orientation, bool invert)
     {
         currentVoxelMode = voxelMode;
         currentOrientation = orientation;
         std::ofstream outfile;
-        outfile.open(outputVolumeFileName, std::ios_base::out | std::ios_base::binary | std::ios_base::trunc);
+        outfile.open(outputVolumeFileName.string(), std::ios_base::out | std::ios_base::binary | std::ios_base::trunc);
         if( !outfile.good() )
         {
-            throw std::ios_base::failure("Failed to open output file "+outputVolumeFileName+" for writing!");
+            throw std::ios_base::failure( "Failed to open output file " + outputVolumeFileName.string() + " for writing" );
         }
 
         RangeTransformation* rangeTransformation = createRangeTransformation(volume, invert);
@@ -39,7 +39,7 @@ namespace libmmv
 
         if( !outfile.good() )
         {
-            throw std::ios_base::failure("Error encountered while writing to output file " + outputVolumeFileName);
+            throw std::ios_base::failure( "Error encountered while writing to output file " + outputVolumeFileName.string() );
         }
         outfile.close();
     }

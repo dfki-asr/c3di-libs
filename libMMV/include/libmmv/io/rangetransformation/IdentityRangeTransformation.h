@@ -1,5 +1,4 @@
 #pragma once
-#include <cstddef>
 #include "libmmv/io/rangetransformation/RangeTransformation.h"
 
 namespace libmmv

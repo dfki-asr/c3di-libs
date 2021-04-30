@@ -17,11 +17,11 @@ namespace libmmv
         std::size_t realNumberOfElements = 0;
         for(unsigned int i = 0; i < numberOfElements; i++)
         {
-            if(!isinf(data1[i]) && !isinf(data2[i]))
+            if(std::isfinite(data1[i]) ^ std::isfinite(data2[i]))
             {
                 throw std::runtime_error("Found infinite value which corresponding value is finite!");
             }
-            else if(!isinf(data1[i]))
+            else if(std::isfinite(data1[i]))
             {
                 ++realNumberOfElements;
                 rmsError += (data1[i] - data2[i]) * (data1[i] - data2[i]);

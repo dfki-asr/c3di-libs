@@ -1,6 +1,6 @@
 #pragma once
-#include <cstddef>
 #include "libmmv/algorithm/volumestatistics/VolumeStatistics.h"
+#include "libmmv/math/Vec2.h"
 
 namespace libmmv
 {

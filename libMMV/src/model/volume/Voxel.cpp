@@ -1,6 +1,5 @@
-#include "libmmv/model/volume/Voxel.h"
 #include <stdexcept>
-#include <string>
+#include "libmmv/model/volume/Voxel.h"
 
 namespace libmmv
 {
@@ -8,7 +7,7 @@ namespace libmmv
     {
         switch( type )
         {
-        case DataType::UCHAR_8:         return sizeof(byte_t);
+        case DataType::UCHAR_8:        return sizeof(byte_t);
         case DataType::HALF_FLOAT_16:  return sizeof(half_float_t);
         case DataType::FLOAT_32:       return sizeof(float);
         default:

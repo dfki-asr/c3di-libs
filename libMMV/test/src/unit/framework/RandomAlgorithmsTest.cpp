@@ -26,5 +26,10 @@ using namespace libmmv;
 TEST_F(RandomAlgorithmsTest, TestRandomImageGeneration)
 {
     generateTestImage(256, 256, 42);
-    ImageComparator::assertImagesAreEqual(std::string(TESTDATA_DIR) + "/actual/random_image/randomTest.tif", std::string(TESTDATA_DIR) + "/expected/random_image/randomTest.tif");
+#ifdef WIN32
+    std::string expected_file_name = "randomTest_Windows.tif";
+#else
+    std::string expected_file_name = "randomTest_Linux.tif";
+#endif
+    ImageComparator::assertImagesAreEqual(std::string(TESTDATA_DIR) + "/actual/random_image/randomTest.tif", std::string(TESTDATA_DIR) + "/expected/random_image/" + expected_file_name);
 }

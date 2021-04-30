@@ -1,7 +1,6 @@
 #include "libmmv/algorithm/GeometricAlgorithms.h"
-#include "libmmv/model/geometry/Ray.h"
 #include "libmmv/model/geometry/Plane.h"
-
+#include "libmmv/model/geometry/Ray.h"
 namespace libmmv
 {
     const float EPSILON = 1e-5f;

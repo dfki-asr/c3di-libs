@@ -1,6 +1,6 @@
 #pragma once
 #include "libmmv/math/Vec3.h"
-#include <sstream>
+
 
 namespace libmmv
 {

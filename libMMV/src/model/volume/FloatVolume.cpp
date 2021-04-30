@@ -9,7 +9,10 @@ namespace libmmv
     FloatVolume::FloatVolume(const Vec3ui& resolution, std::optional<float> initValue)
         : Volume(Voxel::DataType::FLOAT_32, resolution, initValue)
     {
-        Volume::init(initValue ? 0.0f : *initValue);
+        if (!initValue.has_value())
+            Volume::init(0.0f);
+        else
+            Volume::init(*initValue);
     }
 
     FloatVolume::FloatVolume(const Vec3ui& resolution, const float* initialData)
@@ -21,13 +24,19 @@ namespace libmmv
     FloatVolume::FloatVolume(const Vec3ui& resolution, const BoundingBox3f& bbox, std::optional<float> initValue)
         : Volume(Voxel::DataType::FLOAT_32, resolution, bbox, std::nullopt)
     {
-        Volume::init(initValue ? 0.0f : *initValue);
+        if (!initValue.has_value())
+            Volume::init(0.0f);
+        else
+            Volume::init(*initValue);
     }
 
     FloatVolume::FloatVolume(const Vec3ui& resolution, const Vec3f& voxelSize, std::optional<float> initValue)
         : Volume(Voxel::DataType::FLOAT_32, resolution, voxelSize, initValue)
     {
-        Volume::init(initValue ? 0.0f : *initValue);
+        if (!initValue.has_value())
+            Volume::init(0.0f);
+        else
+            Volume::init(*initValue);
     }
 
     FloatVolume::~FloatVolume()

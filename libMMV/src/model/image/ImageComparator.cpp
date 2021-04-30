@@ -1,10 +1,10 @@
+#include <limits.h>
+#include <memory>
 #include "libmmv/model/image/ImageComparator.h"
+#include "libmmv/model/image/Image.h"
 #include "libmmv/evaluation/RootMeanSquareError.h"
 #include "libmmv/io/deserializer/ImageDeserializer.h"
-#include "libmmv/evaluation/RootMeanSquareError.h"
-#include "libmmv/model/image/Image.h"
-#include <memory>
-#include <limits>
+
 
 namespace libmmv
 {
@@ -59,9 +59,9 @@ namespace libmmv
 
         for(unsigned int i = 0; i < first->getPixelCount(); i++)
         {
-            if(isinf(first->getData()[i]))
+            if(!std::isfinite(first->getData()[i]))
                 throw std::runtime_error("illegal value in data");
-            if(isinf(second->getData()[i]))
+            if(!std::isfinite(second->getData()[i]))
                 throw std::runtime_error("illegal value in data");
 
             if(second->getData()[i] < minValue)
@@ -98,10 +98,11 @@ namespace libmmv
     void ImageComparator::assertImagesAreEqual(Image *firstImage, Image *secondImage)
     {
         const float rms = getRMS(firstImage, secondImage);
-        if (rms > 0.1f) {
-            std::stringstream err;
-            err << "Images are different, according to high cumulative RMS error " << rms;
-            throw std::runtime_error(err.str());
+        if (rms > 0.1f)
+        {
+            std::stringstream message;
+            message << "Images are different, according to high cumulative RMS error " << rms << std::endl;
+            throw std::runtime_error( message.str() );
         }
 
         const float maxPixelIntensity = std::fmaxf(firstImage->findMaxValue(), secondImage->findMaxValue());

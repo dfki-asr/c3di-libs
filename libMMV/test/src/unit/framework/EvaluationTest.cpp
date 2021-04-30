@@ -5,7 +5,6 @@
 #include "libmmv/model/image/Image.h"
 #include "libmmv/model/image/ImageComparator.h"
 #include "libmmv/model/volume/Voxel.h"
-
 #include "libmmv/evaluation/RootMeanSquareError.h"
 #include "libmmv/evaluation/SignalToNoiseRatio.h"
 #include "libmmv/evaluation/StatisticalStandardMeasures.h"

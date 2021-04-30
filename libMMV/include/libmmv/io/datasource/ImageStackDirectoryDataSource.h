@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <map>
+#include <filesystem>
 #include "libmmv/io/datasource/CachingImageStackDataSource.h"
 
 namespace libmmv
@@ -11,16 +12,16 @@ namespace libmmv
         class ImageLocation
         {
         protected:
-            std::string path;
+            std::filesystem::path path;
             unsigned int indexInImageStack;
 
         public:
             static const unsigned int NOT_INSIDE_IMAGE_STACK = (unsigned int)-1;
 
             ImageLocation();
-            ImageLocation(const std::string& path, unsigned int indexInImageStack = NOT_INSIDE_IMAGE_STACK);
+            ImageLocation(const std::filesystem::path& path, unsigned int indexInImageStack = NOT_INSIDE_IMAGE_STACK);
 
-            const std::string& getPath() const;
+            const std::filesystem::path& getPath() const;
             bool isInsideImageStack() const;
             unsigned int getIndexInImageStack() const;
         };
@@ -39,11 +40,11 @@ namespace libmmv
         virtual HyperStackIndex lastIndex() const override;
 
     protected:
-        std::string directory;
+        std::filesystem::path directory;
         Vec2ui resolution;
         std::map<HyperStackIndex, ImageLocation> imageLocations;
 
-        std::string getAbsoluteImageLocation(const std::string& location);
+        std::filesystem::path getAbsoluteImageLocation(const std::filesystem::path& location);
         Image* loadImageFromLocation(const ImageLocation& location);
     };
 }

@@ -93,9 +93,9 @@ namespace libmmv
         }
         if (resolution.z < count)
         {
-            std::stringstream err;
-            err << "volume of size " << resolution.string() << " cannot be split into " << count << " subvolumes";
-            throw std::runtime_error(err.str());
+            std::stringstream message;
+            message << "volume of size " << resolution << " cannot be split into " << count << " subvolumes";
+            throw std::runtime_error( message.str() );
         }
         unsigned int subVolumeResZ = resolution.z / count;
         unsigned int remaining = resolution.z - count * subVolumeResZ;

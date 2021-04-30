@@ -1,9 +1,8 @@
 #pragma once
 
-#include <sstream>
+#include <iostream>
 #include <vector>
 #include <cstring>
-
 #include "Vec2.h"
 #include "Vec3.h"
 
@@ -127,7 +126,7 @@ namespace libmmv
             return m;
         }
 
-    protected:
+    private:
 
         int indexOfMinor(int i, int droppedIndex) {
             if (i < droppedIndex)

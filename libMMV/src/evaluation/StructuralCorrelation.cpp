@@ -1,4 +1,3 @@
-
 #include "libmmv/evaluation/RootMeanSquareError.h"
 #include "libmmv/algorithm/NumericalAlgorithms.h"
 #include "libmmv/evaluation/StructuralCorrelation.h"

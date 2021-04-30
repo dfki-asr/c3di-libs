@@ -1,6 +1,6 @@
-#include <math.h>
-#include <stdexcept>
 #include "libmmv/evaluation/StatisticalStandardMeasures.h"
+#include <cmath>
+#include <stdexcept>
 
 namespace libmmv
 {
@@ -97,7 +97,7 @@ namespace libmmv
 
     float StatisticalStandardMeasures::computeStandardDeviation(const float* data, size_t numberOfElements, bool unbiasedEstimate)
     {
-        return (float)sqrt(computeVariance(data, numberOfElements, unbiasedEstimate));
+        return std::sqrt(computeVariance(data, numberOfElements, unbiasedEstimate));
     }
 
     float StatisticalStandardMeasures::computeStandardDeviation(const std::vector<float> data, bool unbiasedEstimate)

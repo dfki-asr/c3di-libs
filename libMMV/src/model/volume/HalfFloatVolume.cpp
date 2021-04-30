@@ -9,13 +9,16 @@ namespace libmmv
     HalfFloatVolume::HalfFloatVolume(const Vec3ui& resolution, std::optional<float> initValue)
         : Volume(Voxel::DataType::HALF_FLOAT_16, resolution, initValue)
     {
-        Volume::init(initValue ? 0.0f : *initValue);
+        Volume::init(initValue == std::nullopt ? 0.0f : *initValue);
     }
 
     HalfFloatVolume::HalfFloatVolume(const Vec3ui& resolution, const BoundingBox3f& bbox, std::optional<float> initValue)
         : Volume(Voxel::DataType::HALF_FLOAT_16, resolution, bbox, std::nullopt)
     {
-        Volume::init(initValue ? 0.0f : *initValue);
+        if (!initValue.has_value())
+            Volume::init(0.0f);
+        else
+            Volume::init(*initValue);
     }
 
     HalfFloatVolume::HalfFloatVolume(const Vec3ui& resolution, const float* initialData)

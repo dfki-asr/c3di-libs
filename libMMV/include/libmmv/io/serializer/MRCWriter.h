@@ -1,6 +1,7 @@
 #pragma once
 #include "libmmv/io/serializer/VolumeFileFormatWriter.h"
-#include <fstream>
+#include "libmmv/model/volume/Volume.h"
+#include "libmmv/io/IOEnumerations.h"
 
 namespace libmmv
 {

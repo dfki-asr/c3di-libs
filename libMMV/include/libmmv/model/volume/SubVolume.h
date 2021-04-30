@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include "libmmv/model/volume/Volume.h"
 #include "libmmv/model/volume/VolumeProperties.h"
 

@@ -25,13 +25,8 @@ namespace libmmv
         if(formatEntry != fileFormats.end())
             return formatEntry->second;
 
-        size_t idx = outputVolumeFileName.rfind('.');
-        if (idx != std::string::npos) {
-            specifiedExtension = outputVolumeFileName.substr(idx+1);
-        }
-        else {
-            specifiedExtension = "No extension found in filename";
-        }
+        std::filesystem::path filepath(outputVolumeFileName);
+        specifiedExtension = filepath.extension().string();
 
         formatEntry = fileFormats.find(specifiedExtension);
         if(formatEntry == fileFormats.end())

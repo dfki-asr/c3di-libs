@@ -9,7 +9,7 @@ namespace libmmv
     {
     public:
         ImageStackDataSource();
-        ~ImageStackDataSource();
+        virtual ~ImageStackDataSource();
 
         virtual Vec2ui getResolution() const = 0;
         virtual unsigned int getNumberOfProjections() const = 0;

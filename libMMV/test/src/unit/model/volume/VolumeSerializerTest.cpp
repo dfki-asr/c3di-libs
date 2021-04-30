@@ -1,5 +1,5 @@
-#include "gtest/gtest.h"
 #include <fstream>
+#include "gtest/gtest.h"
 #include "libmmv/io/serializer/VolumeSerializer.h"
 #include "libmmv/model/volume/Voxel.h"
 #include "libmmv/io/datasource/MRCHeader.h"

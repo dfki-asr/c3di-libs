@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <optional>
 #include "libmmv/model/volume/BoundingBox.h"
 #include "libmmv/math/Vec3.h"
 #include "libmmv/model/volume/Voxel.h"

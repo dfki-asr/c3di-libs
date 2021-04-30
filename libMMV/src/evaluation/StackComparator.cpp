@@ -84,9 +84,9 @@ namespace libmmv
         const float rms = getRMSBetweenVolumes(firstVolume, secondVolume);
         if(rms > acceptableRMSError)
         {
-            std::stringstream err;
-            err << "volumes\n\t" << firstVolume << " and \n\t" << secondVolume << "difference: " << rms;
-            throw std::runtime_error(err.str());
+            std::stringstream message;
+            message << "volumes " << firstVolume << " and " << secondVolume << " difference " << rms << std::endl;
+            throw std::runtime_error( message.str() );
         }
     }
 
@@ -106,9 +106,9 @@ namespace libmmv
         const float rms = getRMSBetweenVolumes(firstVolume, secondVolume);
         if(rms > acceptableRMSError)
         {
-            std::stringstream err;
-            err << "volumes differ by " << rms;
-            throw std::runtime_error(err.str());
+            std::stringstream message;
+            message << "volumes differ by " << rms;
+            throw std::runtime_error( message.str() );
         }
     }
 }

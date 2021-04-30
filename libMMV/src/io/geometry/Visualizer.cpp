@@ -1,13 +1,12 @@
-#define _USE_MATH_DEFINES
+#include <fstream>
+#include <cmath>
+#include <filesystem>
 #include "libmmv/io/geometry/Visualizer.h"
 #include "libmmv/algorithm/GeometricAlgorithms.h"
-#include "libmmv/model/geometry/Plane.h"
-#include "libmmv/model/geometry/Ray.h"
 #include "libmmv/io/serializer/ImageSerializer.h"
 #include "libmmv/model/image/Image.h"
-#include "libmmv/model/volume/BoundingBox.h"
-#include <cmath>
-#include <fstream>
+#include "libmmv/model/geometry/Ray.h"
+#include "libmmv/model/geometry/Plane.h"
 
 namespace libmmv
 {
@@ -15,7 +14,7 @@ namespace libmmv
         : path(path.back() != '/' && path.back() != '\\' ? path + "/" : path)
         , basename(basename)
     {
-        
+        std::filesystem::create_directories(this->path + "textures/");
     }
 
     Visualizer::~Visualizer()
@@ -388,8 +387,8 @@ namespace libmmv
         {
             std::stringstream materialTextureFileName;
             materialTextureFileName << basename << "_" << materialName << "_kd";
-            file << "map_Kd " << materialTextureFileName.str() << ".png" << std::endl;
-            ImageSerializer::writeImage(path + materialTextureFileName.str(), material.texture, ImageSerializer::PNG_GRAY_8);
+            file << "map_Kd textures/" << materialTextureFileName.str() << ".png" << std::endl;
+            ImageSerializer::writeImage(path + "textures/" + materialTextureFileName.str(), material.texture, ImageSerializer::PNG_GRAY_8);
         }
         file << std::endl;
     }
