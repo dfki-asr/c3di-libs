@@ -31,7 +31,7 @@ set(LIBMMV_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include")
 set(LIBMMV_INCLUDE_DIR ${LIBMMV_INCLUDE_DIR} PARENT_SCOPE)
 
 target_include_directories(${LIBMMV_LIBRARY_NAME} PUBLIC "${LIBMMV_INCLUDE_DIR}" "${FREEIMAGEPLUS_INCLUDE_PATH}")
-target_link_libraries(${LIBMMV_LIBRARY_NAME} "${FREEIMAGEPLUS_LIBRARIES}")
+target_link_libraries(${LIBMMV_LIBRARY_NAME} PUBLIC "${FREEIMAGEPLUS_LIBRARIES}")
 
 # copy dependent DLLs to executable directory after building the target
 # using MSVC compiler (usually on Windows platform)
