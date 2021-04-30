@@ -2,7 +2,7 @@
 # Source: https://github.com/drakeguan/cmake_modules/blob/master/FindFreeImagePlus.cmake
 
 IF (WIN32)
-    set(FREEIMAGE_ROOT_DIR "${C3DI_LIBS_DEPENDENCIES_ROOT}/FreeImage")
+    set(FREEIMAGE_ROOT_DIR "${C3DI_LIBS_DEPENDENCIES_ROOT}/FreeImage/Windows/")
     FIND_PATH( FREEIMAGEPLUS_INCLUDE_PATH FreeImagePlus.h
         ${FREEIMAGE_ROOT_DIR}/include
         ${FREEIMAGE_ROOT_DIR}
@@ -11,27 +11,14 @@ IF (WIN32)
     FIND_LIBRARY( FREEIMAGEPLUS_LIBRARY
         NAMES FreeImagePlus freeimageplus
         PATHS
-        ${FREEIMAGE_ROOT_DIR}/lib
+        ${FREEIMAGE_ROOT_DIR}/x64
         ${FREEIMAGE_ROOT_DIR}
         ${CMAKE_CURRENT_SOURCE_DIR}/dependencies/FreeImage/lib/x64
         DOC "The FreeImagePlus library")
 ELSE (WIN32)
-        FIND_PATH( FREEIMAGEPLUS_INCLUDE_PATH FreeImagePlus.h
-                /usr/include
-                /usr/local/include
-                /sw/include
-                /opt/local/include
-                DOC "The directory where FreeImagePlus.h resides")
-        FIND_LIBRARY( FREEIMAGEPLUS_LIBRARY
-                NAMES FreeImagePlus freeimageplus
-                PATHS
-                /usr/lib64
-                /usr/lib
-                /usr/local/lib64
-                /usr/local/lib
-                /sw/lib
-                /opt/local/lib
-                DOC "The FreeImagePlus library")
+   set(FREEIMAGE_ROOT_DIR "${C3DI_LIBS_DEPENDENCIES_ROOT}/FreeImage/Linux/")
+   set(FREEIMAGEPLUS_INCLUDE_PATH ${FREEIMAGE_ROOT_DIR})
+   set(FREEIMAGEPLUS_LIBRARY ${FREEIMAGE_ROOT_DIR}/x64/libFreeImagePlus.so)
 ENDIF (WIN32)
 
 SET(FREEIMAGEPLUS_LIBRARIES ${FREEIMAGEPLUS_LIBRARY})
