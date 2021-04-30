@@ -41,8 +41,8 @@ if(MSVC)
 					   make_directory "${CMAKE_BINARY_DIR}/$<CONFIG>")
 	add_custom_command(TARGET ${LIBMMV_LIBRARY_NAME} POST_BUILD
 					   COMMAND ${CMAKE_COMMAND} -E
-					   copy "${FREEIMAGE_ROOT_DIR}/lib/x64/FreeImage.dll"
-							"${FREEIMAGE_ROOT_DIR}/lib/x64/FreeImagePlus.dll"
+					   copy "${FREEIMAGE_ROOT_DIR}/x64/FreeImage.dll"
+							"${FREEIMAGE_ROOT_DIR}/x64/FreeImagePlus.dll"
 							"${CMAKE_BINARY_DIR}/$<CONFIG>/")
 endif(MSVC)
 
