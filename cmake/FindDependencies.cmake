@@ -15,8 +15,8 @@ else(CMAKE_SIZEOF_VOID_P EQUAL 8)
 endif(CMAKE_SIZEOF_VOID_P EQUAL 8)
 
 find_path(C3DI_LIBS_DEPENDENCIES_ROOT
-  NAMES "dependencties_package.txt"
-  HINTS "c3di_libs_dependencies" "../c3di_libs_dependencies" "../../c3di_libs_dependencies"
+  NAMES "dependencies_package.txt"
+  HINTS "dependencies" "../c3di_libs_dependencies" "../../c3di_libs_dependencies"
   DOC "dependencies root directory")
   message(STATUS "dependencies root: ${C3DI_LIBS_DEPENDENCIES_ROOT}")
 

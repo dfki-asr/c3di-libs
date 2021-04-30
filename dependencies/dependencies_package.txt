@@ -1,0 +1,3 @@
+FreeImage	: 3.16.0	: http://freeimage.sourceforge.net/download.html : Recompile DLLs for new MSVS to remove dependency on MSVS redist
+gtest		: 1.10.0	: https://github.com/google/googletest.git : Its ok as it is
+rapidxml	: 1.13  	: http://rapidxml.sourceforge.net/ : Its ok as it is
