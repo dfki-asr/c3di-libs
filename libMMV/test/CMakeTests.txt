@@ -3,10 +3,7 @@ cmake_minimum_required(VERSION 3.10)
 include(CommonFlags)
 include(GetSourceFiles)
 include(PrecompiledHeaders)
-include(Cpp11)
 include(CopyDLLs)
-
-SwitchOnCpp11()
 
 add_definitions(/D_USE_MATH_DEFINES)
 add_definitions(/DTESTDATA_DIR=\"${CMAKE_CURRENT_SOURCE_DIR}\")
