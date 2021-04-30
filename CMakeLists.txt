@@ -22,7 +22,6 @@ set(LIBRARY_OUTPUT_PATH    ${EXECUTABLE_OUTPUT_PATH})
 
 include(CommonFlags)
 include(GetSourceFiles)
-include(PrecompiledHeaders)
 
 find_package(Dependencies)
 
