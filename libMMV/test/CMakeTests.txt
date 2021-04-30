@@ -17,21 +17,12 @@ generate_source_tree(HOST_SOURCES "${DIRS}" "${FILE_TYPES}")
 add_executable(${LIBMMV_UNIT_TEST_NAME} ${HOST_SOURCES})
 
 set(MMV_TEST_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src")
-target_include_directories(
-		${LIBMMV_UNIT_TEST_NAME} 
-		PRIVATE 
-		"${MMV_TEST_INCLUDE_DIR}" 
-		"${LIBMMV_INCLUDE_DIR}" 
-		"${FREEIMAGEPLUS_INCLUDE_PATH}"
+target_include_directories(${LIBMMV_UNIT_TEST_NAME} 
+		PRIVATE "${MMV_TEST_INCLUDE_DIR}" 
 )
 		
-target_link_libraries(
-	${LIBMMV_UNIT_TEST_NAME} 
-	PRIVATE 
-	${LIBMMV_LIBRARY_NAME} 
-	gtest 
-	"${FREEIMAGEPLUS_LIBRARIES}"
-)
+target_link_libraries(${LIBMMV_UNIT_TEST_NAME} 
+	    PRIVATE  ${LIBMMV_LIBRARY_NAME} gtest)
 
 if(CMAKE_COMPILER_IS_GNUCC)
 	target_link_libraries(${PROJECT_NAME} PRIVATE pthread)
