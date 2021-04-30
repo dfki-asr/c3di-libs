@@ -1,8 +1,6 @@
-#include "stdafx.h"
+#include "libmmv/evaluation/LeastSquaresLinearFit.h"
 
-#include "LeastSquaresLinearFit.h"
-
-namespace ettention
+namespace libmmv
 {
     LeastSquaresLinearFit::LeastSquaresLinearFit(const std::vector<Vec2f>& points)
         : points(points)

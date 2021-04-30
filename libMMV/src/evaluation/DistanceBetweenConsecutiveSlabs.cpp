@@ -1,10 +1,9 @@
-#include "stdafx.h"
+#include "libmmv/evaluation/DistanceBetweenConsecutiveSlabs.h"
+#include "libmmv/evaluation/RootMeanSquareError.h"
+#include "libmmv/model/image/Image.h"
+#include "libmmv/model/volume/Volume.h"
 
-#include "DistanceBetweenConsecutiveSlabs.h"
-#include "evaluation/RootMeanSquareError.h"
-#include "model/image/Image.h"
-
-namespace ettention
+namespace libmmv
 {
 
     float DistanceBetweenConsecutiveSlabs::l2NormDistance( Volume* volume, unsigned int slabSize )

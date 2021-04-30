@@ -1,12 +1,11 @@
-#include "stdafx.h"
-#include "ImageStackDirectoryDataSource.h"
+#include "libmmv/io/datasource/ImageStackDirectoryDataSource.h"
 #include <unordered_set>
 
-#include "io/deserializer/ImageDeserializer.h"
-#include "io/datasource/ImageStackDataSource.h"
+#include "libmmv/io/deserializer/ImageDeserializer.h"
+#include "libmmv/io/datasource/ImageStackDataSource.h"
 
 
-namespace ettention
+namespace libmmv
 {
     ImageStackDirectoryDataSource::ImageStackDirectoryDataSource()
     {
@@ -36,22 +35,22 @@ namespace ettention
 
     Image* ImageStackDirectoryDataSource::loadImageFromLocation(const ImageLocation& location) {
         Image* img = 0;
-        std::filesystem::path fpath = getAbsoluteImageLocation(location.getPath());
+        std::string fpath = getAbsoluteImageLocation(location.getPath());
 
         if (location.isInsideImageStack())
         {
-            img = ImageDeserializer::readImageFromStack(fpath.string(), location.getIndexInImageStack());
+            img = ImageDeserializer::readImageFromStack(fpath, location.getIndexInImageStack());
         }
         else
         {
-            img = ImageDeserializer::readImage(fpath.string());
+            img = ImageDeserializer::readImage(fpath);
         }
         return img;
     }
 
-    std::filesystem::path ImageStackDirectoryDataSource::getAbsoluteImageLocation( const std::filesystem::path& location )
+    std::string ImageStackDirectoryDataSource::getAbsoluteImageLocation( const std::string& location )
     {
-        return directory / location.string();
+        return directory +"/"+ location;
     }
 
     std::vector<HyperStackIndex> ImageStackDirectoryDataSource::collectAllValidIndices() const
@@ -69,12 +68,12 @@ namespace ettention
         return "ImageStackDirectoryDatasource";
     }
 
-    ettention::HyperStackIndex ImageStackDirectoryDataSource::firstIndex() const
+    libmmv::HyperStackIndex ImageStackDirectoryDataSource::firstIndex() const
     {
         return imageLocations.begin()->first;
     }
 
-    ettention::HyperStackIndex ImageStackDirectoryDataSource::lastIndex() const
+    libmmv::HyperStackIndex ImageStackDirectoryDataSource::lastIndex() const
     {
         return imageLocations.rbegin()->first;
     }
@@ -99,13 +98,13 @@ namespace ettention
     {
     }
 
-    ImageStackDirectoryDataSource::ImageLocation::ImageLocation(const std::filesystem::path& path, unsigned int indexInImageStack)
+    ImageStackDirectoryDataSource::ImageLocation::ImageLocation(const std::string& path, unsigned int indexInImageStack)
         : path(path)
         , indexInImageStack(indexInImageStack)
     {
     }
 
-    const std::filesystem::path& ImageStackDirectoryDataSource::ImageLocation::getPath() const
+    const std::string& ImageStackDirectoryDataSource::ImageLocation::getPath() const
     {
         return path;
     }
@@ -119,7 +118,7 @@ namespace ettention
     {
         if(!this->isInsideImageStack())
         {
-            throw std::ios_base::failure("path " + path.string() + " points directly to an image and not a stack of images");
+            throw std::ios_base::failure("path " + path + " points directly to an image and not a stack of images");
         }
         return indexInImageStack;
     }

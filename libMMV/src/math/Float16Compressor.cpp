@@ -1,8 +1,6 @@
-#include "stdafx.h"
+#include "libmmv/math/Float16Compressor.h"
 
-#include "Float16Compressor.h"
-
-namespace ettention
+namespace libmmv
 {
     half_float_t Float16Compressor::_compress(float value)
     {

@@ -1,8 +1,6 @@
-#include "stdafx.h"
+#include "libmmv/io/IOEnumerations.h"
 
-#include "IOEnumerations.h"
-
-namespace ettention
+namespace libmmv
 {
     CoordinateOrder parseVoxelCoordinateOrder(const std::string& coordinateOrder)
     {
@@ -113,7 +111,7 @@ namespace ettention
         }
     }
 
-    ettention::Vec3ui getOrderDependentResolution(Vec3ui resolution, CoordinateOrder order)
+    libmmv::Vec3ui getOrderDependentResolution(Vec3ui resolution, CoordinateOrder order)
     {
         unsigned int orderDependentIndices[3];
         fillOrderDependentIndices(orderDependentIndices, order);

@@ -1,14 +1,11 @@
-#include "stdafx.h"
+#include "libmmv/io/deserializer/VolumeDeserializer.h"
+#include "libmmv/model/volume/ByteVolume.h"
+#include "libmmv/model/volume/HalfFloatVolume.h"
+#include "libmmv/model/volume/FloatVolume.h"
+#include "libmmv/io/datasource/MRCDataSource.h"
+#include "libmmv/io/datasource/ImageStackDataSource.h"
 
-#include "VolumeDeserializer.h"
-#include "model/volume/ByteVolume.h"
-#include "model/volume/HalfFloatVolume.h"
-#include "model/volume/FloatVolume.h"
-#include "model/volume/VolumeProperties.h"
-#include "io/datasource/MRCDataSource.h"
-#include "io/datasource/ImageStackDataSource.h"
-
-namespace ettention
+namespace libmmv
 {
     Volume* VolumeDeserializer::load(ImageStackDataSource* dataSource, Voxel::DataType voxelType, unsigned int subVolumeCount)
     {
@@ -17,13 +14,13 @@ namespace ettention
         Volume *volume;
         switch( voxelType )
         {
-        case ettention::Voxel::DataType::UCHAR_8:
+        case libmmv::Voxel::DataType::UCHAR_8:
             volume = new ByteVolume(volumeResolution, 0.0f);
             break;
-        case ettention::Voxel::DataType::HALF_FLOAT_16:
+        case libmmv::Voxel::DataType::HALF_FLOAT_16:
             volume = new HalfFloatVolume(volumeResolution, 0.0f);
             break;
-        case ettention::Voxel::DataType::FLOAT_32:
+        case libmmv::Voxel::DataType::FLOAT_32:
             volume = new FloatVolume(volumeResolution, 0.0f);
             break;
         default:

@@ -1,6 +1,17 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.10)
 
 project(Libraries)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
+
+# gtest
+set(GOOGLETEST_VERSION 1.10.0) 
+message("Configuring GoogleTest v${GOOGLETEST_VERSION}")
+set(gtest_force_shared_crt ON CACHE BOOL "Always use msvcrt.dll" FORCE)
+add_subdirectory("gtest-1.10.0")
+set(GTEST_INCLUDE_DIR "gtest-1.10.0/include")
+enable_testing()
 
 # include cmake modules
 set(CMAKE_MODULE_PATH      ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
@@ -12,9 +23,6 @@ set(LIBRARY_OUTPUT_PATH    ${EXECUTABLE_OUTPUT_PATH})
 include(CommonFlags)
 include(GetSourceFiles)
 include(PrecompiledHeaders)
-include(Cpp11)
-
-SwitchOnCpp11()
 
 find_package(Dependencies)
 
@@ -22,9 +30,7 @@ find_package(Dependencies)
 add_subdirectory(memoryManager)
 
 # lib MMV
-add_subdirectory(libMMV)
-add_subdirectory(libMMV/test)
-# add_dependencies(libMMVUnitTest libMMV)
+add_subdirectory(libmmv)
 
 # lib Thread Pool
 add_subdirectory(libThreadPool)
@@ -34,4 +40,4 @@ add_subdirectory(libTimer)
 
 # lib Program Config
 add_subdirectory(libCFG)
-add_dependencies(libCFG libMMV)
+add_dependencies(libCFG libmmv)

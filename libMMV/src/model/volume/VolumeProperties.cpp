@@ -1,8 +1,6 @@
-#include "stdafx.h"
+#include "libmmv/model/volume/VolumeProperties.h"
 
-#include "VolumeProperties.h"
-
-namespace ettention
+namespace libmmv
 {
     VolumeProperties::VolumeProperties(Voxel::DataType voxelType, const Vec3ui& resolution)
         : voxelType(voxelType)
@@ -95,9 +93,9 @@ namespace ettention
         }
         if (resolution.z < count)
         {
-            std::stringstream message;
-            message << "volume of size " << resolution << " cannot be split into " << count << " subvolumes";
-            throw std::runtime_error( message.str() );
+            std::stringstream err;
+            err << "volume of size " << resolution.string() << " cannot be split into " << count << " subvolumes";
+            throw std::runtime_error(err.str());
         }
         unsigned int subVolumeResZ = resolution.z / count;
         unsigned int remaining = resolution.z - count * subVolumeResZ;

@@ -56,24 +56,24 @@ namespace ettention
         return std::stoul(strValue);
     }
 
-    Vec2ui ParameterSource::getVec2uiParameter(std::string aName) const
+    libmmv::Vec2ui ParameterSource::getVec2uiParameter(std::string aName) const
     {
-        return getVectorParameter<Vec2ui>( aName );
+        return getVectorParameter<libmmv::Vec2ui>( aName );
     }
 
-    Vec3ui ParameterSource::getVec3uiParameter(std::string aName) const
+    libmmv::Vec3ui ParameterSource::getVec3uiParameter(std::string aName) const
     {
-        return getVectorParameter<Vec3ui>(aName);
+        return getVectorParameter<libmmv::Vec3ui>(aName);
     }
 
-    Vec3f ParameterSource::getVec3fParameter(std::string aName) const
+    libmmv::Vec3f ParameterSource::getVec3fParameter(std::string aName) const
     {
-        return getVectorParameter<Vec3f>(aName);
+        return getVectorParameter<libmmv::Vec3f>(aName);
     }
 
-    Vec2f ParameterSource::getVec2fParameter(std::string aName) const
+    libmmv::Vec2f ParameterSource::getVec2fParameter(std::string aName) const
     {
-        return getVectorParameter<Vec2f>(aName);
+        return getVectorParameter<libmmv::Vec2f>(aName);
     }
 
     std::string ParameterSource::replaceCommasWithSpaces(std::string str) const

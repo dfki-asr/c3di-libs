@@ -1,9 +1,9 @@
-#include "stdafx.h"
-#include "SubVolume.h"
-#include "model/volume/Voxel.h"
-#include "math/Float16Compressor.h"
+#include <cstring>
+#include "libmmv/model/volume/SubVolume.h"
+#include "libmmv/model/volume/Voxel.h"
+#include "libmmv/math/Float16Compressor.h"
 
-namespace ettention
+namespace libmmv
 { 
     SubVolume::SubVolume(Volume* volume)
         : volume(volume)

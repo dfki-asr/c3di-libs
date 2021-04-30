@@ -1,7 +1,7 @@
-#include "stdafx.h"
-#include "Plane.h"
+#include "libmmv/model/geometry/Plane.h"
+#include "libmmv/model/geometry/Ray.h"
 
-namespace ettention
+namespace libmmv
 {
     static const float EPSILON = 1e-5f;
     static const float MINIMUM_NORMAL_LENGTH = 1e-4f;

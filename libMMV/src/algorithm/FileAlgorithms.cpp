@@ -1,16 +1,17 @@
-#include "stdafx.h"
+#include <stdexcept>
+#include "libmmv/algorithm/FileAlgorithms.h"
 
-#include <filesystem>
-
-#include "algorithm/FileAlgorithms.h"
-
-namespace ettention
+namespace libmmv
 {
-    std::filesystem::path FileAlgorithms::normalizePath(const std::filesystem::path &path)
+    std::string FileAlgorithms::normalizePath(const std::string &path)
     {
-        std::filesystem::path absPath = std::filesystem::absolute(path);
-        std::filesystem::path::iterator it = absPath.begin();
-        std::filesystem::path result = *it++;
+        //TODO: Remove boost dependency in favor of C++17 Filesystem
+
+        throw std::runtime_error("Not implemented");
+
+        /*std::string absPath = absolute(path);
+        boost::filesystem::path::iterator it = absPath.begin();
+        boost::filesystem::path result = *it++;
 
         // Get canonical version of the existing part
         for(; exists(result / *it) && it != absPath.end(); ++it)
@@ -35,6 +36,6 @@ namespace ettention
             }
         }
 
-        return result;
+        return result;*/
     }
 }

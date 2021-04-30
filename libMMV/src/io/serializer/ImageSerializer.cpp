@@ -1,11 +1,14 @@
-#include "stdafx.h"
+#ifndef NOMINMAX
+# define NOMINMAX
+#endif
+#include "libmmv/io/serializer/ImageSerializer.h"
+#include "FreeImagePlus.h"
+#include <cstring>
+#include <limits>
+#include <fstream>
+#include "libmmv/model/image/Image.h"
 
-#include <FreeImagePlus.h>
-
-#include "io/serializer/ImageSerializer.h"
-#include "model/image/Image.h"
-
-namespace ettention
+namespace libmmv
 {
 
     ImageSerializer::ImageSerializer()
@@ -23,7 +26,7 @@ namespace ettention
 
         for(unsigned int y = 0; y < fimg.getHeight(); y++)
         {
-            memcpy(fimg.getScanLine(y), image->getScanLineData(y), fimg.getWidth() * sizeof(float));
+            std::memcpy(fimg.getScanLine(y), image->getScanLineData(y), fimg.getWidth() * sizeof(float));
         }
 
         std::string filename = getFileName(filenameTrunk, format);
@@ -40,7 +43,7 @@ namespace ettention
         fimg.flipVertical();
         if(!fimg.save(filename.c_str()))
         {
-            throw std::ios_base::failure( "Saving of image to %1% failed!" + filename );
+            throw std::ios_base::failure("Saving of image to "+filename+" failed!");
         }
     }
 
@@ -79,9 +82,9 @@ namespace ettention
 
     std::string ImageSerializer::constructGrayscalePPMHeader(size_t width, size_t height)
     {
-        std::stringstream header;
-        header << "P5 " << width << " " << height << " 255" << std::endl;
-        return header.str();
+        std::ostringstream hdr;
+        hdr << "P5 " << width << " " << height << " 255 ";
+        return hdr.str();
     }
 
     std::pair<float, float> ImageSerializer::computeExtremalValuesOfFloatBuffer(float* data, unsigned int size)
@@ -101,7 +104,7 @@ namespace ettention
         std::ofstream ppmFileStream(filename.c_str(), std::ofstream::binary);
         if(!ppmFileStream.good())
         {
-            std::string errorMessage = "Unable to open file for PPM serialization " + filename;
+            std::string errorMessage = "Unable to open file for PPM serialization "+ filename;
             throw std::runtime_error(errorMessage.c_str());
         }
 

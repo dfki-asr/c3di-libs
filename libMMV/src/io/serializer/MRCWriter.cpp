@@ -1,8 +1,9 @@
-#include "stdafx.h"
-#include "io/serializer/MRCWriter.h"
-#include "io/datasource/MRCHeader.h"
+#include <cstring>
+#include "libmmv/io/serializer/MRCWriter.h"
+#include "libmmv/io/datasource/MRCHeader.h"
+#include "libmmv/io/rangetransformation/RangeTransformation.h"
 
-namespace ettention
+namespace libmmv
 {
     MRCWriter::MRCWriter()
     {
@@ -16,13 +17,13 @@ namespace ettention
     {
         switch( mode )
         {
-        case ettention::IO_VOXEL_TYPE_UNSIGNED_8:
-        case ettention::IO_VOXEL_TYPE_UNSIGNED_16:
-        case ettention::IO_VOXEL_TYPE_FLOAT_32:
+        case libmmv::IO_VOXEL_TYPE_UNSIGNED_8:
+        case libmmv::IO_VOXEL_TYPE_UNSIGNED_16:
+        case libmmv::IO_VOXEL_TYPE_FLOAT_32:
             return true;
 
-        case ettention::IO_VOXEL_TYPE_UNSPECIFIED:
-        case ettention::IO_VOXEL_TYPE_SIGNED_16:
+        case libmmv::IO_VOXEL_TYPE_UNSPECIFIED:
+        case libmmv::IO_VOXEL_TYPE_SIGNED_16:
         default:
             return false;
         }
@@ -43,7 +44,7 @@ namespace ettention
     void MRCWriter::writeHeader(std::ofstream &outfile, VolumeProperties& volumeProperties, const Vec3ui volumeResolution, RangeTransformation* rangeTransformation)
     {
         MRCHeader header;
-        memset(&header, 0, sizeof(MRCHeader));
+        std::memset(&header, 0, sizeof(MRCHeader));
 
         header.mode = currentVoxelMode;
 

@@ -1,8 +1,8 @@
-#include "stdafx.h"
 
-#include "Coordinates.h"
 
-namespace ettention
+#include "libmmv/algorithm/Coordinates.h"
+
+namespace libmmv
 {
 
 }

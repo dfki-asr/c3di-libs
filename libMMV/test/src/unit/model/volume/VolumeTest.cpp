@@ -1,19 +1,17 @@
-#include "stdafx.h"
-
 #include "gtest/gtest.h"
-#include "model/image/Image.h"
-#include "model/image/ImageComparator.h"
-#include "io/deserializer/ImageDeserializer.h"
-#include "io/serializer/VolumeSerializer.h"
-#include "model/volume/Volume.h"
-#include "model/volume/FloatVolume.h"
-#include "model/volume/HalfFloatVolume.h"
-#include "model/volume/ByteVolume.h"
-#include "model/volume/VolumeProperties.h"
-#include "algorithm/volumestatistics/VolumeStatistics.h"
+#include "libmmv/model/image/Image.h"
+#include "libmmv/model/image/ImageComparator.h"
+#include "libmmv/io/deserializer/ImageDeserializer.h"
+#include "libmmv/io/serializer/VolumeSerializer.h"
+#include "libmmv/model/volume/Volume.h"
+#include "libmmv/model/volume/FloatVolume.h"
+#include "libmmv/model/volume/HalfFloatVolume.h"
+#include "libmmv/model/volume/ByteVolume.h"
+#include "libmmv/model/volume/VolumeProperties.h"
+#include "libmmv/algorithm/volumestatistics/VolumeStatistics.h"
 
 
-namespace ettention
+namespace libmmv
 {
 
     class VolumeTest : public ::testing::Test

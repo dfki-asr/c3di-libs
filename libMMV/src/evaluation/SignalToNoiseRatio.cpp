@@ -1,11 +1,10 @@
-#include "stdafx.h"
-#include "evaluation/RootMeanSquareError.h"
-#include "algorithm/NumericalAlgorithms.h"
-#include "SignalToNoiseRatio.h"
-#include "StatisticalStandardMeasures.h"
+#include "libmmv/evaluation/RootMeanSquareError.h"
+#include "libmmv/algorithm/NumericalAlgorithms.h"
+#include "libmmv/evaluation/SignalToNoiseRatio.h"
+#include "libmmv/evaluation/StatisticalStandardMeasures.h"
 #include <cmath>
 
-namespace ettention
+namespace libmmv
 {
     SignalToNoiseRatio::SignalToNoiseRatio()
     {

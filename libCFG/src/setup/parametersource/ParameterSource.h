@@ -2,8 +2,8 @@
 
 #include <filesystem>
 
-#include "math/Vec2.h"
-#include "math/Vec3.h"
+#include "libmmv/math/Vec2.h"
+#include "libmmv/math/Vec3.h"
 
 namespace ettention
 {
@@ -35,10 +35,10 @@ namespace ettention
         virtual bool getBoolParameter(std::string aName) const;
         virtual int getIntParameter(std::string aName) const;
         virtual unsigned int getUIntParameter(std::string aName) const;
-        virtual Vec2ui getVec2uiParameter(std::string aName) const;
-        virtual Vec3ui getVec3uiParameter(std::string aName) const;
-        virtual Vec3f getVec3fParameter(std::string aName) const;
-        virtual Vec2f getVec2fParameter(std::string aName) const;
+        virtual libmmv::Vec2ui getVec2uiParameter(std::string aName) const;
+        virtual libmmv::Vec3ui getVec3uiParameter(std::string aName) const;
+        virtual libmmv::Vec3f getVec3fParameter(std::string aName) const;
+        virtual libmmv::Vec2f getVec2fParameter(std::string aName) const;
 
     protected:
         std::string replaceCommasWithSpaces(std::string str) const;

@@ -1,9 +1,9 @@
-#include "stdafx.h"
-#include "RootMeanSquareError.h"
-#include "algorithm/NumericalAlgorithms.h"
-#include "StructuralCorrelation.h"
 
-namespace ettention
+#include "libmmv/evaluation/RootMeanSquareError.h"
+#include "libmmv/algorithm/NumericalAlgorithms.h"
+#include "libmmv/evaluation/StructuralCorrelation.h"
+
+namespace libmmv
 {
     StructuralCorrelation::StructuralCorrelation()
     {

@@ -1,20 +1,18 @@
-#include "stdafx.h"
-
 #include "gtest/gtest.h"
-#include "algorithm/GeometricAlgorithms.h"
-#include "model/geometry/Ray.h"
-#include "math/Vec2.h"
-#include "math/Vec3.h"
-#include "math/Vec4.h"
+#include "libmmv/algorithm/GeometricAlgorithms.h"
+#include "libmmv/model/geometry/Ray.h"
+#include "libmmv/math/Vec2.h"
+#include "libmmv/math/Vec3.h"
+#include "libmmv/math/Vec4.h"
 
 #include <cmath>
 
-namespace ettention
+namespace libmmv
 {
     class GeometricAlgorithmsTest : public ::testing::Test {};
 }
 
-using namespace ettention;
+using namespace libmmv;
 
 TEST_F(GeometricAlgorithmsTest, ClosestPointOfTwoRays_Case_A)
 {

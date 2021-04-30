@@ -24,8 +24,8 @@ namespace ettention
         virtual bool getBoolParameter(std::string aName) const override;
         virtual int getIntParameter(std::string aName) const override;
         virtual unsigned int getUIntParameter(std::string aName) const override;
-        virtual Vec3ui getVec3uiParameter(std::string aName) const override;
-        virtual Vec3f getVec3fParameter(std::string aName) const override;
+        virtual libmmv::Vec3ui getVec3uiParameter(std::string aName) const override;
+        virtual libmmv::Vec3f getVec3fParameter(std::string aName) const override;
 
         virtual void parse() override;
         virtual void parseAll();

@@ -1,13 +1,12 @@
-#include "stdafx.h"
 
 #include "gtest/gtest.h"
 
-#include "math/Matrix4x4.h"
-#include "math/Vec4.h"
+#include "libmmv/math/Matrix4x4.h"
+#include "libmmv/math/Vec4.h"
 
 #include <cmath>
 
-namespace ettention
+namespace libmmv
 {
 	class Matrix4x4Test : public ::testing::Test
 	{
@@ -15,7 +14,7 @@ namespace ettention
 	};
 }
 
-using namespace ettention;
+using namespace libmmv;
 
 void assertNear(const Vec3f& left, const Vec3f& right, float epsilon)
 {
@@ -46,7 +45,7 @@ void assertNear(const Matrix4x4& left, const Matrix4x4& right, float epsilon)
 
 TEST_F(Matrix4x4Test, UnitIdentity)
 {
-    Matrix4x4 m = Matrix4x4::identity;
+    Matrix4x4 m = Matrix4x4::identity();
     ASSERT_FLOAT_EQ(m.at(0,0), 1.0f);
     ASSERT_FLOAT_EQ(m.at(0,1), 0.0f);
     ASSERT_FLOAT_EQ(m.at(0,2), 0.0f);
@@ -68,7 +67,7 @@ TEST_F(Matrix4x4Test, UnitIdentity)
 TEST_F(Matrix4x4Test, UnitConstructor2)
 {
     Matrix4x4 m = Matrix4x4(1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f);
-    ASSERT_TRUE (m == Matrix4x4::identity);
+    ASSERT_TRUE (m == Matrix4x4::identity());
 }
 
 TEST_F(Matrix4x4Test, UnitConstructor3)
@@ -95,7 +94,7 @@ TEST_F(Matrix4x4Test, UnitConstructor3)
     v[14] = 0.0f;
     v[15] = 1.0f;
     Matrix4x4 m = Matrix4x4(v);
-    ASSERT_TRUE (m == Matrix4x4::identity);
+    ASSERT_TRUE (m == Matrix4x4::identity());
 
     v.resize(15);
     ASSERT_THROW(m = Matrix4x4(v), std::exception);
@@ -107,7 +106,7 @@ TEST_F(Matrix4x4Test, UnitConstructor3)
 
 TEST_F(Matrix4x4Test, UnitInvertScaling)
 {
-    Matrix4x4 m = Matrix4x4::identity;
+    Matrix4x4 m = Matrix4x4::identity();
     Matrix4x4 inverse = m.inverse();
     ASSERT_TRUE (m == inverse);
 
@@ -143,10 +142,10 @@ TEST_F(Matrix4x4Test, UnitInvert)
     auto det = m.determinant();
     ASSERT_NEAR(det, 13.0f / 8.0f, EPS);
     auto product = m * mInv;
-    assertNear(product, Matrix4x4::identity, EPS);
+    assertNear(product, Matrix4x4::identity(), EPS);
     auto inverted = m.inverse();
     assertNear(inverted, mInv, EPS);
-    assertNear(inverted * m, Matrix4x4::identity, EPS);
+    assertNear(inverted * m, Matrix4x4::identity(), EPS);
 }
 
 TEST_F(Matrix4x4Test, UnitInvert_Translation)
@@ -164,7 +163,7 @@ TEST_F(Matrix4x4Test, UnitInvert_Translation)
 
 TEST_F(Matrix4x4Test, UnitMultiplyVector)
 {
-    Matrix4x4 m = Matrix4x4::identity;
+    Matrix4x4 m = Matrix4x4::identity();
 
     m.at(0,0) *= 2.0f;
     m.at(1,1) *= 2.0f;
@@ -184,7 +183,7 @@ TEST_F(Matrix4x4Test, UnitMultiplyVector)
 TEST_F(Matrix4x4Test, UnitMultiplyMatrix)
 {
     {
-        Matrix4x4 m = Matrix4x4::identity;
+        Matrix4x4 m = Matrix4x4::identity();
         Matrix4x4 n = Matrix4x4::translationMatrix(Vec3f(1.0f, 2.0f, 3.0f));
         Matrix4x4 result = multiply(m, n);
         ASSERT_TRUE(result == n); 

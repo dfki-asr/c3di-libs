@@ -1,8 +1,6 @@
-#include "stdafx.h"
+#include "libmmv/io/datasource/ImageStackDataSource.h"
 
-#include "ImageStackDataSource.h"
-
-namespace ettention
+namespace libmmv
 {
     ImageStackDataSource::ImageStackDataSource()
     {

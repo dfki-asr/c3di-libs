@@ -1,10 +1,8 @@
-#include "stdafx.h"
+#include "libmmv/model/volume/Volume.h"
+#include "libmmv/model/volume/Voxel.h"
+#include "libmmv/model/image/Image.h"
 
-#include "Volume.h"
-#include "model/volume/Voxel.h"
-#include "model/image/Image.h"
-
-namespace ettention
+namespace libmmv
 {
     Volume::Volume(Voxel::DataType voxelType, const Vec3ui& resolution, std::optional<float> initValue)
         : properties(voxelType, resolution)

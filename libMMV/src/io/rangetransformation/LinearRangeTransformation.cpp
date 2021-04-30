@@ -1,8 +1,7 @@
-#include "stdafx.h"
-#include "LinearRangeTransformation.h"
-#include "algorithm/volumestatistics/VolumeStatistics.h"
+#include "libmmv/io/rangetransformation/LinearRangeTransformation.h"
+#include "libmmv/algorithm/volumestatistics/VolumeStatistics.h"
 
-namespace ettention
+namespace libmmv
 {
     LinearRangeTransformation::LinearRangeTransformation(Volume* volume, float outputRangeMinimum, float outputRangeMaximum)
         : RangeTransformation(volume)

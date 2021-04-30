@@ -1,8 +1,6 @@
-#include "stdafx.h"
+#include "libmmv/math/Matrix3x3.h"
 
-#include "Matrix3x3.h"
-
-namespace ettention
+namespace libmmv
 { 
     template <typename _ValType>
     const Matrix3x3<_ValType> Matrix3x3<_ValType>::identity(1, 0, 0, 0, 1, 0, 0, 0, 1);

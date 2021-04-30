@@ -3,8 +3,8 @@
 #include <iostream>
 #include <fstream>
 
-#include "algorithm/FileAlgorithms.h"
-#include "algorithm/VectorAlgorithms.h"
+#include "libmmv/algorithm/FileAlgorithms.h"
+#include "libmmv/algorithm/VectorAlgorithms.h"
 
 namespace ettention
 {
@@ -34,7 +34,7 @@ namespace ettention
 
     bool XMLParameterSource::parameterExists(std::string parameterName) const
     {
-        auto property_path = VectorAlgorithms::splitString(parameterName, ".");
+        auto property_path = libmmv::VectorAlgorithms::splitString(parameterName, ".");
         std::string property = property_path[0];
         rapidxml::xml_node<>* node = xml_document.first_node( &property[0] );
         if (node == nullptr)
@@ -51,7 +51,7 @@ namespace ettention
 
     std::string XMLParameterSource::getStringParameter(std::string parameterName)  const
     {
-        auto property_path = VectorAlgorithms::splitString(parameterName, ".");
+        auto property_path = libmmv::VectorAlgorithms::splitString(parameterName, ".");
         std::string property = property_path[0];
         rapidxml::xml_node<>* node = xml_document.first_node( &property[0] );
         if ( node == nullptr )
@@ -79,7 +79,7 @@ namespace ettention
     {
         std::filesystem::path pathToXMLFile = std::filesystem::path(xmlFilename).parent_path();
         std::filesystem::path totalPath = pathToXMLFile / path;
-        return FileAlgorithms::normalizePath(totalPath);
+        return libmmv::FileAlgorithms::normalizePath(totalPath.string());
     }
 
 }

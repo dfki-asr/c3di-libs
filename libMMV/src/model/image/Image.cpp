@@ -1,10 +1,9 @@
-#include "stdafx.h"
-
+#include "libmmv/model/image/Image.h"
 #include <cassert>
+#include <numeric>
+#include <sstream>
 
-#include "Image.h"
-
-namespace ettention
+namespace libmmv
 {
     Image::Image(const Image* other)
         : resolution(other->resolution)
@@ -15,11 +14,10 @@ namespace ettention
     Image::Image(const Vec2ui& resolution, const float* initialData)
         : resolution(resolution)
     {
-        if (resolution.x * resolution.y == 0)
-        {
-            std::stringstream description;
-            description << "Invalid image size: " << resolution;
-            throw std::domain_error( description.str() );
+        if (resolution.x * resolution.y == 0) {
+            std::stringstream err;
+            err << "Invalid image size: " << resolution;
+            throw std::domain_error(err.str());
         }
 
 		data.resize(resolution.x * resolution.y);
@@ -91,10 +89,7 @@ namespace ettention
 
     float Image::computeAverageValue() const
     {
-        float sum = 0.0f;
-        for (auto value : data)
-            sum += value;
-        return sum / (float) data.size();
+        return std::accumulate(data.begin(), data.end(), 0.0f) / (float)data.size();
     }
 
     float Image::findMinValue() const

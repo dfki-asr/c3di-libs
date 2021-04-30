@@ -1,10 +1,10 @@
-#include "stdafx.h"
-#include "CachingImageStackDataSource.h"
+#include "libmmv/io/datasource/CachingImageStackDataSource.h"
 
-#include "model/image/Image.h"
+#include "libmmv/model/image/Image.h"
+#include "libmmv/io/HyperStackIndex.h"
 #include <cstdio>
 
-namespace ettention
+namespace libmmv
 {
     CachingImageStackDataSource::CachingImageStackDataSource(unsigned int maxCachedImages)
         : maxCachedImages(maxCachedImages)

@@ -1,12 +1,14 @@
-#include "stdafx.h"
+#define _USE_MATH_DEFINES
 #include <math.h>
-#include "Matrix4x4.h"
-// #include "Exception.h"
+#include <cstring>
+#include "libmmv/math/Matrix4x4.h"
 
-namespace ettention 
+namespace libmmv 
 {
 
-    const Matrix4x4 Matrix4x4::identity = Matrix4x4(1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f);
+    const Matrix4x4 Matrix4x4::identity() {
+        return Matrix4x4(1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f);
+    }
 
     Matrix4x4::Matrix4x4(std::vector<float> v) 
         : values(16)
@@ -130,7 +132,7 @@ namespace ettention
 
     Matrix4x4 Matrix4x4::translationMatrix(const Vec3f& translate)
     {
-        Matrix4x4 m = identity;
+        Matrix4x4 m = identity();
         m.at(3, 0) = translate.x;
         m.at(3, 1) = translate.y;
         m.at(3, 2) = translate.z;
@@ -139,7 +141,7 @@ namespace ettention
 
     Matrix4x4 Matrix4x4::scaleMatrix(float v)
     {
-        Matrix4x4 m = identity;
+        Matrix4x4 m = identity();
         m.at(0, 0) = v;
         m.at(1, 1) = v;
         m.at(2, 2) = v;
@@ -148,7 +150,7 @@ namespace ettention
 
     Matrix4x4 Matrix4x4::scaleMatrix(const Vec3f& s)
     {
-        Matrix4x4 m = identity;
+        Matrix4x4 m = identity();
         m.at(0, 0) = s.x;
         m.at(1, 1) = s.y;
         m.at(2, 2) = s.z;
@@ -163,7 +165,7 @@ namespace ettention
         const float stheta = sinf(theta);
         const float cpsi   = cosf(psi);
         const float spsi   = sinf(psi);
-        Matrix4x4 m = Matrix4x4::identity;
+        Matrix4x4 m = Matrix4x4::identity();
         m.at(0,0) = cphi*cpsi-ctheta*sphi*spsi;
         m.at(1,0) = cpsi*sphi+ctheta*cphi*spsi;
         m.at(2,0) = spsi*stheta;
@@ -187,7 +189,7 @@ namespace ettention
         const float cTheta = std::cos(theta);
         const float sPsi = std::sin(psi);
         const float cPsi = std::cos(psi);
-        Matrix4x4 m = Matrix4x4::identity;
+        Matrix4x4 m = Matrix4x4::identity();
         m.at(0, 0) = cPhi * cPsi + sPhi * sTheta * sPsi;
         m.at(1, 0) = -cPhi * sPsi + sPhi * sTheta * cPsi;
         m.at(2, 0) = sPhi * cTheta;
@@ -202,7 +204,7 @@ namespace ettention
 
     void Matrix4x4::serializeToFloatArray(float* buffer)
     {
-        memcpy(buffer, &values[0], 16 * sizeof(float));
+        std::memcpy(buffer, &values[0], 16 * sizeof(float));
     }
 
     float Matrix4x4::determinantOfMinor(int droppedColumn, int droppedRow)

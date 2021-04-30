@@ -1,13 +1,12 @@
-#include "stdafx.h"
 #include "OutputParameterSet.h"
 #include "setup/parametersource/ParameterSource.h"
-#include "model/volume/FloatVolume.h"
+#include "libmmv/model/volume/FloatVolume.h"
 #include <fstream>
 #include <cstdio>
 
 namespace ettention
 {
-    OutputParameterSet::OutputParameterSet(VoxelValueType voxelValueType, CoordinateOrder orientation, bool invert)
+    OutputParameterSet::OutputParameterSet(libmmv::VoxelValueType voxelValueType, libmmv::CoordinateOrder orientation, bool invert)
         : voxelType(voxelValueType)
         , orientation(orientation)
         , invert(invert)
@@ -25,16 +24,16 @@ namespace ettention
             format = "." + parameterSource->getStringParameter("output.format");
         }
 
-        voxelType = IO_VOXEL_TYPE_FLOAT_32;
+        voxelType = libmmv::IO_VOXEL_TYPE_FLOAT_32;
         if(parameterSource->parameterExists("output.options.voxelType"))
         {
-            voxelType = parseVoxelValueType(parameterSource->getStringParameter("output.options.voxelType"));
+            voxelType = libmmv::parseVoxelValueType(parameterSource->getStringParameter("output.options.voxelType"));
         }
 
-        orientation = ORDER_XZY;
+        orientation = libmmv::ORDER_XZY;
         if(parameterSource->parameterExists("output.options.orientation"))
         {
-            orientation = parseVoxelCoordinateOrder(parameterSource->getStringParameter("output.options.orientation"));
+            orientation = libmmv::parseVoxelCoordinateOrder(parameterSource->getStringParameter("output.options.orientation"));
         }
 
         invert = false;
@@ -64,12 +63,12 @@ namespace ettention
         return format;
     }
 
-    VoxelValueType OutputParameterSet::getVoxelType() const
+    libmmv::VoxelValueType OutputParameterSet::getVoxelType() const
     {
         return voxelType;
     }
 
-    CoordinateOrder OutputParameterSet::getOrientation() const
+    libmmv::CoordinateOrder OutputParameterSet::getOrientation() const
     {
         return orientation;
     }
@@ -101,9 +100,9 @@ namespace ettention
         }
     }
 
-    void OutputParameterSet::testValidityOfOutputOptions(VolumeSerializer *serializer) const
+    void OutputParameterSet::testValidityOfOutputOptions(libmmv::VolumeSerializer *serializer) const
     {
-        auto *volume = new FloatVolume(Vec3ui(8, 4, 2), 0.0f);
+        auto *volume = new libmmv::FloatVolume(libmmv::Vec3ui(8, 4, 2), 0.0f);
         serializer->write(volume, filename.string(), format, voxelType, orientation);
         delete volume;
 

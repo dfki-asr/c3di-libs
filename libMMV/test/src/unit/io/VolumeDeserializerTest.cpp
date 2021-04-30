@@ -1,10 +1,8 @@
-#include "stdafx.h"
-
 #include "gtest/gtest.h"
-#include "model/volume/Volume.h"
-#include "io/deserializer/VolumeDeserializer.h"
+#include "libmmv/model/volume/Volume.h"
+#include "libmmv/io/deserializer/VolumeDeserializer.h"
 
-namespace ettention
+namespace libmmv
 {
     class VolumeDeserializerTest : public ::testing::Test
     {
@@ -32,7 +30,7 @@ namespace ettention
     };
 }
 
-using namespace ettention;
+using namespace libmmv;
 
 TEST_F(VolumeDeserializerTest, Test_32BIT_MRC)
 {

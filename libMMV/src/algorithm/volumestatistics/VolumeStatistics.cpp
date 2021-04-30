@@ -1,7 +1,8 @@
-#include "stdafx.h"
-#include "VolumeStatistics.h"
+#include "libmmv/algorithm/volumestatistics/VolumeStatistics.h"
+#include <limits>
+#include "libmmv/model/volume/Volume.h"
 
-namespace ettention
+namespace libmmv
 {
     VolumeStatistics::VolumeStatistics()
         : min(std::numeric_limits<float>::quiet_NaN())
@@ -15,7 +16,7 @@ namespace ettention
     {
     }
 
-    ettention::VolumeStatistics VolumeStatistics::compute(Volume* volume)
+    libmmv::VolumeStatistics VolumeStatistics::compute(Volume* volume)
     {
         float min = std::numeric_limits<float>::max();
         float max = std::numeric_limits<float>::min();

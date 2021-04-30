@@ -1,8 +1,10 @@
-#include "stdafx.h"
-#include "algorithm/NumericalAlgorithms.h"
-#include "math/Matrix3x3.h"
+#define _USE_MATH_DEFINES
+#include "libmmv/algorithm/NumericalAlgorithms.h"
+#include "libmmv/math/Matrix3x3.h"
+#include <cmath>
+#include <iomanip>
 
-namespace ettention
+namespace libmmv
 {
     float NumericalAlgorithms::degreeToRadians(float degree)
     {
@@ -109,7 +111,7 @@ namespace ettention
 
     void NumericalAlgorithms::assertValueIsFinite(float value)
     {
-        if (!std::isfinite(value))
+        if (isinf(value))
         {
             throw std::runtime_error("Infinite value in data!");
         }

@@ -1,7 +1,6 @@
-#include "stdafx.h"
-#include "IdentityRangeTransformation.h"
+#include "libmmv/io/rangetransformation/IdentityRangeTransformation.h"
 
-namespace ettention
+namespace libmmv
 {
     IdentityRangeTransformation::IdentityRangeTransformation(Volume* volume)
         : RangeTransformation(volume)

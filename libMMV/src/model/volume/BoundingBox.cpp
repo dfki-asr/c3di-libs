@@ -1,7 +1,6 @@
-#include "stdafx.h"
-#include "BoundingBox.h"
+#include "libmmv/model/volume/BoundingBox.h"
 
-namespace ettention 
+namespace libmmv 
 {
     template<typename _T>
     BoundingBox<_T>::BoundingBox(const _T& min, const _T& max) 
@@ -93,7 +92,7 @@ namespace ettention
 
 
 	template<typename _T>
-	_T ettention::BoundingBox<_T>::getNextPointInside(_T coordinate) const
+	_T libmmv::BoundingBox<_T>::getNextPointInside(_T coordinate) const
 	{
 		for (int i = 0; i < coordinate.nDim(); i++)
 		{
@@ -107,14 +106,14 @@ namespace ettention
 
 
 	template<typename _T>
-	void ettention::BoundingBox<_T>::cropToBorder(const BoundingBox<_T>& border)
+	void libmmv::BoundingBox<_T>::cropToBorder(const BoundingBox<_T>& border)
 	{
 		min = componentWiseMax(min, border.min);
 		max = componentWiseMin(max, border.max);
 	}
 
 	template<typename _T>
-	void ettention::BoundingBox<_T>::shrink(int frame)
+	void libmmv::BoundingBox<_T>::shrink(int frame)
 	{
 		for (int i = 0; i < min.nDim(); i++)
 			min.dim[i] += frame;

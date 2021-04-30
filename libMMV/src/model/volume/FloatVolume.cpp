@@ -1,42 +1,33 @@
-#include "stdafx.h"
-#include "FloatVolume.h"
-#include "model/volume/Voxel.h"
-#include "model/image/Image.h"
+#include <cstring>
+#include "libmmv/model/volume/FloatVolume.h"
+#include "libmmv/model/volume/Voxel.h"
+#include "libmmv/model/image/Image.h"
 
-namespace ettention
+namespace libmmv
 {
 
-    FloatVolume::FloatVolume( const Vec3ui& resolution, std::optional<float> initValue )
-        : Volume( Voxel::DataType::FLOAT_32, resolution, initValue )
+    FloatVolume::FloatVolume(const Vec3ui& resolution, std::optional<float> initValue)
+        : Volume(Voxel::DataType::FLOAT_32, resolution, initValue)
     {
-        if (!initValue.has_value())
-            Volume::init(0.0f);
-        else
-            Volume::init(*initValue);
+        Volume::init(initValue ? 0.0f : *initValue);
     }
 
-    FloatVolume::FloatVolume( const Vec3ui& resolution, const float* initialData )
-        : Volume( Voxel::DataType::FLOAT_32, resolution, std::nullopt )
+    FloatVolume::FloatVolume(const Vec3ui& resolution, const float* initialData)
+        : Volume(Voxel::DataType::FLOAT_32, resolution, std::nullopt)
     {
         init(initialData);
     }
 
-    FloatVolume::FloatVolume( const Vec3ui& resolution, const BoundingBox3f& bbox, std::optional<float> initValue )
-        : Volume( Voxel::DataType::FLOAT_32, resolution, bbox, std::nullopt )
+    FloatVolume::FloatVolume(const Vec3ui& resolution, const BoundingBox3f& bbox, std::optional<float> initValue)
+        : Volume(Voxel::DataType::FLOAT_32, resolution, bbox, std::nullopt)
     {
-        if (!initValue.has_value())
-            Volume::init(0.0f);
-        else
-            Volume::init(*initValue);
+        Volume::init(initValue ? 0.0f : *initValue);
     }
 
-    FloatVolume::FloatVolume( const Vec3ui& resolution, const Vec3f& voxelSize, std::optional<float> initValue )
-        : Volume( Voxel::DataType::FLOAT_32, resolution, voxelSize, initValue )
+    FloatVolume::FloatVolume(const Vec3ui& resolution, const Vec3f& voxelSize, std::optional<float> initValue)
+        : Volume(Voxel::DataType::FLOAT_32, resolution, voxelSize, initValue)
     {
-        if (!initValue.has_value())
-            Volume::init(0.0f);
-        else
-            Volume::init(*initValue);
+        Volume::init(initValue ? 0.0f : *initValue);
     }
 
     FloatVolume::~FloatVolume()

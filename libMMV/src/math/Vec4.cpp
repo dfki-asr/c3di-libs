@@ -1,7 +1,6 @@
-#include "stdafx.h"
-#include "Vec4.h"
+#include "libmmv/math/Vec4.h"
 
-namespace ettention
+namespace libmmv
 {
   template<>
   Vec4<unsigned int> Vec4<unsigned int>::operator-() const

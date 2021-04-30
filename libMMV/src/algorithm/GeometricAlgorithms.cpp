@@ -1,8 +1,8 @@
-#include "stdafx.h"
-#include "algorithm/GeometricAlgorithms.h"
-#include "model/geometry/Plane.h"
+#include "libmmv/algorithm/GeometricAlgorithms.h"
+#include "libmmv/model/geometry/Ray.h"
+#include "libmmv/model/geometry/Plane.h"
 
-namespace ettention
+namespace libmmv
 {
     const float EPSILON = 1e-5f;
 

@@ -1,11 +1,9 @@
-#include "stdafx.h"
+#include "libmmv/evaluation/StackComparator.h"
+#include "libmmv/model/volume/Volume.h"
+#include "libmmv/io/datasource/MRCDataSource.h"
+#include "libmmv/evaluation/RootMeanSquareError.h"
 
-#include "StackComparator.h"
-#include "model/volume/Volume.h"
-#include "io/datasource/MRCDataSource.h"
-#include "evaluation/RootMeanSquareError.h"
-
-namespace ettention
+namespace libmmv
 {
     const float StackComparator::acceptableRMSError = 0.011f;
 
@@ -86,9 +84,9 @@ namespace ettention
         const float rms = getRMSBetweenVolumes(firstVolume, secondVolume);
         if(rms > acceptableRMSError)
         {
-            std::stringstream message;
-            message << "volumes " << firstVolume << " and " << secondVolume << " difference " << rms << std::endl;
-            throw std::runtime_error( message.str() );
+            std::stringstream err;
+            err << "volumes\n\t" << firstVolume << " and \n\t" << secondVolume << "difference: " << rms;
+            throw std::runtime_error(err.str());
         }
     }
 
@@ -108,9 +106,9 @@ namespace ettention
         const float rms = getRMSBetweenVolumes(firstVolume, secondVolume);
         if(rms > acceptableRMSError)
         {
-            std::stringstream message;
-            message << "volumes differ by " << rms;
-            throw std::runtime_error( message.str() );
+            std::stringstream err;
+            err << "volumes differ by " << rms;
+            throw std::runtime_error(err.str());
         }
     }
 }

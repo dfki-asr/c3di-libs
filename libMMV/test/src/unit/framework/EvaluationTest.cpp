@@ -1,20 +1,18 @@
-#include "stdafx.h"
-
 #include "gtest/gtest.h"
-#include "algorithm/RandomAlgorithms.h"
-#include "io/deserializer/ImageDeserializer.h"
-#include "io/serializer/ImageSerializer.h"
-#include "model/image/Image.h"
-#include "model/image/ImageComparator.h"
-#include "model/volume/Voxel.h"
+#include "libmmv/algorithm/RandomAlgorithms.h"
+#include "libmmv/io/deserializer/ImageDeserializer.h"
+#include "libmmv/io/serializer/ImageSerializer.h"
+#include "libmmv/model/image/Image.h"
+#include "libmmv/model/image/ImageComparator.h"
+#include "libmmv/model/volume/Voxel.h"
 
-#include "evaluation/RootMeanSquareError.h"
-#include "evaluation/SignalToNoiseRatio.h"
-#include "evaluation/StatisticalStandardMeasures.h"
-#include "evaluation/StructuralCorrelation.h"
-#include "evaluation/StructuralSimilarityIndex.h"
+#include "libmmv/evaluation/RootMeanSquareError.h"
+#include "libmmv/evaluation/SignalToNoiseRatio.h"
+#include "libmmv/evaluation/StatisticalStandardMeasures.h"
+#include "libmmv/evaluation/StructuralCorrelation.h"
+#include "libmmv/evaluation/StructuralSimilarityIndex.h"
 
-namespace ettention
+namespace libmmv
 {
     class EvaluationTest : public ::testing::Test
     {
@@ -24,7 +22,7 @@ namespace ettention
     };
 }
 
-using namespace ettention;
+using namespace libmmv;
 
 TEST_F(EvaluationTest, MeanSquareErrorTest)
 {

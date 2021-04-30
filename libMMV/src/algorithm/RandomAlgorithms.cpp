@@ -1,21 +1,18 @@
-#include "stdafx.h"
 
-#include "RandomAlgorithms.h"
+#include "libmmv/algorithm/RandomAlgorithms.h"
+#include "libmmv/model/image/Image.h"
 #include <random>
+#include <functional>
 
-#include "model/image/Image.h"
-
-namespace ettention 
+namespace libmmv 
 {
     void RandomAlgorithms::generateRandomNumbersFromMinusOneToOne(unsigned int amount, std::vector<float>& randomValues, unsigned int seed)
     {
         randomValues.resize(amount);
-
-        std::default_random_engine generator( seed );
-        std::uniform_real_distribution<float> distribution( -1.0f, 1.0f );
-
-        for (unsigned int i = 0; i < amount; i++)
-            randomValues[i] = distribution( generator );
+        std::mt19937 mt_rand(seed);
+        auto real_rand = std::bind(std::uniform_real_distribution<float>(0, 1), mt_rand);
+        for(unsigned int i = 0; i < amount; i++)
+            randomValues[i] = real_rand();
     }
 
     std::vector<float> RandomAlgorithms::generateRandomNumbersFromMinusOneToOne(unsigned int amount, unsigned int seed)
@@ -30,44 +27,40 @@ namespace ettention
     void RandomAlgorithms::generateRandomNumbersFromZeroToMax(unsigned int amount, unsigned int maxValue, std::vector<unsigned int>& randomValues, unsigned int seed)
     {
         randomValues.resize(amount);
-
-        std::default_random_engine generator(seed);
-        std::uniform_int_distribution<unsigned int> distribution( 0, maxValue );
-
-        for (unsigned int i = 0; i < amount; i++)
-            randomValues[i] = distribution(generator);
+        std::mt19937 mt_rand(seed);
+        auto int_rand = std::bind(std::uniform_int_distribution<unsigned int>(0, maxValue), mt_rand);
+        for(unsigned int i = 0; i < amount; i++)
+            randomValues[i] = (unsigned int)int_rand();
     }
 
     void RandomAlgorithms::generateRandomPointsFromZeroToMax(unsigned int amount, Vec2ui maxValue, std::vector<Vec2ui>& randomValues, unsigned int seed)
     {
         randomValues.resize(amount);
 
-        std::default_random_engine generator(seed);
-        std::uniform_int_distribution<unsigned int> distributionA( 0, maxValue.x );
-        std::uniform_int_distribution<unsigned int> distributionB( 0, maxValue.y );
+        std::mt19937 mt_rand(seed);
+        auto int_randX = std::bind(std::uniform_int_distribution<unsigned int>(0, maxValue.x), mt_rand);
+        auto int_randY = std::bind(std::uniform_int_distribution<unsigned int>(0, maxValue.y), mt_rand);
 
         for(unsigned int i = 0; i < amount; i++)
         {
-            const unsigned int a = distributionA(generator);
-            const unsigned int b = distributionB(generator);
+            const unsigned int a = (unsigned int)int_randX();
+            const unsigned int b = (unsigned int)int_randY();
             randomValues[i] = Vec2ui(a,b);
         }
     }
 
-    /* std::vector<Vec3f> RandomAlgorithms::generateRandomUnitVectors(unsigned int amount, unsigned int seed)
+    std::vector<Vec3f> RandomAlgorithms::generateRandomUnitVectors(unsigned int amount, unsigned int seed)
     {
         std::vector<Vec3f> randomValues(amount);
 
-        typedef boost::variate_generator<boost::minstd_rand &, boost::uniform_real<>> gen_type;
-        boost::minstd_rand generator(seed);
-        gen_type die_gen(generator, boost::uniform_real<>(0.0, 1.0));
+        std::mt19937 mt_rand(seed);
+        auto real_rand = std::bind(std::uniform_real_distribution<float>(0, 1), mt_rand);
 
-        boost::generator_iterator<gen_type> die(&die_gen);
         for(unsigned int i = 0; i < amount; i++)
-            randomValues[i] = Vec3f((float) *die++, (float) *die++, (float) *die++);
+            randomValues[i] = Vec3f(real_rand(), real_rand(), real_rand());
 
         return randomValues;
-    } */
+    }
 
     std::vector<unsigned int> RandomAlgorithms::generateRandomPermutationSequence(unsigned int sequenceLength, unsigned int seed)
     {
@@ -87,8 +80,7 @@ namespace ettention
         generateRandomNumbersFromMinusOneToOne(width * height, randomValues, seed);
         
         if (scalingFactor != 1.0)
-            for (size_t index = 0; index < randomValues.size(); index++)
-                randomValues[index] *= scalingFactor;
+            std::transform(randomValues.begin(), randomValues.end(), randomValues.begin(), std::bind(std::multiplies<float>(), scalingFactor, std::placeholders::_1));
     
         Image* randomImage = new Image(Vec2ui(width, height), &randomValues[0]);
         return randomImage;

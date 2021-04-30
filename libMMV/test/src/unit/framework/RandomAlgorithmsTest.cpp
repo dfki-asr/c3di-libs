@@ -1,12 +1,10 @@
-#include "stdafx.h"
-
 #include "gtest/gtest.h"
-#include <algorithm/RandomAlgorithms.h>
-#include "io/serializer/ImageSerializer.h"
-#include "model/image/Image.h"
-#include "model/image/ImageComparator.h"
+#include "libmmv/algorithm/RandomAlgorithms.h"
+#include "libmmv/io/serializer/ImageSerializer.h"
+#include "libmmv/model/image/Image.h"
+#include "libmmv/model/image/ImageComparator.h"
 
-namespace ettention
+namespace libmmv
 {
     class RandomAlgorithmsTest : public ::testing::Test
     {
@@ -23,7 +21,7 @@ namespace ettention
     };
 }
 
-using namespace ettention;
+using namespace libmmv;
 
 TEST_F(RandomAlgorithmsTest, TestRandomImageGeneration)
 {

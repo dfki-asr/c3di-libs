@@ -1,12 +1,23 @@
-#include "stdafx.h"
-
-#include "VectorAlgorithms.h"
-
+#include "libmmv/algorithm/VectorAlgorithms.h"
 #include <regex>
 #include <sstream> 
+#include <algorithm>
 
-namespace ettention
+namespace libmmv
 {
+    VectorAlgorithms::tFloatMinMaxPair VectorAlgorithms::minMax(const std::vector<float>& vector)
+    {
+        typedef std::vector<float>::const_iterator bufferIterator;
+
+        std::pair< bufferIterator, bufferIterator > bufferMinMax = std::minmax_element(vector.begin(), vector.end());
+
+        tFloatMinMaxPair result;
+        result.min = *(bufferMinMax.first);
+        result.max = *(bufferMinMax.second);
+
+        return result;
+    }
+
     void VectorAlgorithms::splitString(const std::string& textToSplit, const std::string& delimiter, std::vector<std::string>& result)
     {
         size_t start = 0;

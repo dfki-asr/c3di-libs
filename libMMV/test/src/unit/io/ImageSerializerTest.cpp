@@ -1,11 +1,9 @@
-#include "stdafx.h"
-
 #include "gtest/gtest.h"
-#include "model/image/Image.h"
-#include "io/deserializer/ImageDeserializer.h"
-#include "io/deserializer/VolumeDeserializer.h"
+#include "libmmv/model/image/Image.h"
+#include "libmmv/io/deserializer/ImageDeserializer.h"
+#include "libmmv/io/deserializer/VolumeDeserializer.h"
 
-namespace ettention
+namespace libmmv
 {
     class ImageSerializerTest : public ::testing::Test {};
 

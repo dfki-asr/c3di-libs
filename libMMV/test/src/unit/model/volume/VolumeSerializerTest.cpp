@@ -1,13 +1,12 @@
-#include "stdafx.h"
-
 #include "gtest/gtest.h"
-#include "io/serializer/VolumeSerializer.h"
-#include "model/volume/Voxel.h"
-#include "io/datasource/MRCHeader.h"
-#include "io/rangetransformation/LinearRangeTransformation.h"
-#include "algorithm/volumestatistics/VolumeStatistics.h"
+#include <fstream>
+#include "libmmv/io/serializer/VolumeSerializer.h"
+#include "libmmv/model/volume/Voxel.h"
+#include "libmmv/io/datasource/MRCHeader.h"
+#include "libmmv/io/rangetransformation/LinearRangeTransformation.h"
+#include "libmmv/algorithm/volumestatistics/VolumeStatistics.h"
 
-namespace ettention
+namespace libmmv
 {
     class VolumeSerializerTest : public ::testing::Test
     {

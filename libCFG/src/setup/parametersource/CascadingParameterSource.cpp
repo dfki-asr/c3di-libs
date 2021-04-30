@@ -96,7 +96,7 @@ namespace ettention
         throw ParameterNotFoundException(aName);
     }
 
-    Vec3ui CascadingParameterSource::getVec3uiParameter(std::string aName) const
+    libmmv::Vec3ui CascadingParameterSource::getVec3uiParameter(std::string aName) const
     {
         for(auto it = sources.begin(); it != sources.end(); ++it)
         {
@@ -108,7 +108,7 @@ namespace ettention
         throw ParameterNotFoundException(aName);
     }
 
-    Vec3f CascadingParameterSource::getVec3fParameter(std::string aName) const
+    libmmv::Vec3f CascadingParameterSource::getVec3fParameter(std::string aName) const
     {
         for(auto it = sources.begin(); it != sources.end(); ++it)
         {

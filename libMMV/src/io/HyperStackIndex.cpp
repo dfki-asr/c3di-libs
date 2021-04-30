@@ -1,7 +1,6 @@
-#include "stdafx.h"
-#include "HyperStackIndex.h"
+#include "libmmv/io/HyperStackIndex.h"
 
-namespace ettention
+namespace libmmv
 {
     HyperStackIndex::HyperStackIndex()
     {

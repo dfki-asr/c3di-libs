@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.10)
 project(libCFG)
 
 INCLUDE(../cmake/CommonFlags)
@@ -16,6 +16,7 @@ set(LIBCFG_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src")
 set(LIBCFG_INCLUDE_DIR ${LIBCFG_INCLUDE_DIR} PARENT_SCOPE)
 
 # set include directories
+message(${LIBMMV_INCLUDE_DIR})
 include_directories("${LIBCFG_INCLUDE_DIR}"
                     "${LIBMMV_INCLUDE_DIR}"
                     "${RAPID_XML_INCLUDE_DIR}"

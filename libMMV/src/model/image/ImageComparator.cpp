@@ -1,11 +1,12 @@
-#include "stdafx.h"
+#include "libmmv/model/image/ImageComparator.h"
+#include "libmmv/evaluation/RootMeanSquareError.h"
+#include "libmmv/io/deserializer/ImageDeserializer.h"
+#include "libmmv/evaluation/RootMeanSquareError.h"
+#include "libmmv/model/image/Image.h"
+#include <memory>
+#include <limits>
 
-#include "ImageComparator.h"
-
-#include "evaluation/RootMeanSquareError.h"
-#include "io/deserializer/ImageDeserializer.h"
-
-namespace ettention
+namespace libmmv
 {
     ImageComparator::ImageComparator()
     {
@@ -53,14 +54,14 @@ namespace ettention
         if(first->getResolution() != second->getResolution())
             throw std::runtime_error("Illegal comparison of images with different resolution!");
 
-        float minValue = FLT_MAX;
-        float maxValue = -FLT_MAX;
+        float minValue = std::numeric_limits<float>::max();
+        float maxValue = -std::numeric_limits<float>::max();
 
         for(unsigned int i = 0; i < first->getPixelCount(); i++)
         {
-            if(!std::isfinite(first->getData()[i]))
+            if(isinf(first->getData()[i]))
                 throw std::runtime_error("illegal value in data");
-            if(!std::isfinite(second->getData()[i]))
+            if(isinf(second->getData()[i]))
                 throw std::runtime_error("illegal value in data");
 
             if(second->getData()[i] < minValue)
@@ -97,11 +98,10 @@ namespace ettention
     void ImageComparator::assertImagesAreEqual(Image *firstImage, Image *secondImage)
     {
         const float rms = getRMS(firstImage, secondImage);
-        if (rms > 0.1f)
-        {
-            std::stringstream message;
-            message << "Images are different, according to high cumulative RMS error " << rms << std::endl;
-            throw std::runtime_error( message.str() );
+        if (rms > 0.1f) {
+            std::stringstream err;
+            err << "Images are different, according to high cumulative RMS error " << rms;
+            throw std::runtime_error(err.str());
         }
 
         const float maxPixelIntensity = std::fmaxf(firstImage->findMaxValue(), secondImage->findMaxValue());

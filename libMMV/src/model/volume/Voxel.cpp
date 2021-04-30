@@ -1,8 +1,8 @@
-#include "stdafx.h"
+#include "libmmv/model/volume/Voxel.h"
+#include <stdexcept>
+#include <string>
 
-#include "model/volume/Voxel.h"
-
-namespace ettention
+namespace libmmv
 {
     size_t Voxel::sizeOfVoxelType(const DataType type)
     {

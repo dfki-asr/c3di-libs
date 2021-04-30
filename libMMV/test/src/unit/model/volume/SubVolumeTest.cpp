@@ -1,16 +1,14 @@
-#include "stdafx.h"
-
 #include "gtest/gtest.h"
-#include "io/serializer/VolumeSerializer.h"
-#include "io/deserializer/ImageDeserializer.h"
-#include "model/volume/Volume.h"
-#include "model/volume/SubVolume.h"
-#include "model/volume/FloatVolume.h"
-#include "model/volume/HalfFloatVolume.h"
-#include "model/volume/VolumeProperties.h"
-#include "model/volume/Voxel.h"
+#include "libmmv/io/serializer/VolumeSerializer.h"
+#include "libmmv/io/deserializer/ImageDeserializer.h"
+#include "libmmv/model/volume/Volume.h"
+#include "libmmv/model/volume/SubVolume.h"
+#include "libmmv/model/volume/FloatVolume.h"
+#include "libmmv/model/volume/HalfFloatVolume.h"
+#include "libmmv/model/volume/VolumeProperties.h"
+#include "libmmv/model/volume/Voxel.h"
 
-namespace ettention
+namespace libmmv
 {
     class SubVolumeTest : public ::testing::Test
     {
@@ -140,7 +138,7 @@ namespace ettention
     };
 }
 
-using namespace ettention;
+using namespace libmmv;
 
 TEST_F(SubVolumeTest, Test_SequentialSubvolumeAccess_Float32)
 {

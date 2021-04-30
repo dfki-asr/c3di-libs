@@ -1,29 +1,25 @@
-#include "stdafx.h"
-#include "HalfFloatVolume.h"
-#include "model/volume/Voxel.h"
-#include "math/Float16Compressor.h"
-#include "model/image/Image.h"
+#include "libmmv/model/volume/HalfFloatVolume.h"
+#include "libmmv/model/volume/Voxel.h"
+#include "libmmv/math/Float16Compressor.h"
+#include "libmmv/model/image/Image.h"
 
-namespace ettention
+namespace libmmv
 {
 
-    HalfFloatVolume::HalfFloatVolume( const Vec3ui& resolution, std::optional<float> initValue )
+    HalfFloatVolume::HalfFloatVolume(const Vec3ui& resolution, std::optional<float> initValue)
         : Volume(Voxel::DataType::HALF_FLOAT_16, resolution, initValue)
     {
-        Volume::init(initValue == std::nullopt ? 0.0f : *initValue);
+        Volume::init(initValue ? 0.0f : *initValue);
     }
 
     HalfFloatVolume::HalfFloatVolume(const Vec3ui& resolution, const BoundingBox3f& bbox, std::optional<float> initValue)
-        : Volume(Voxel::DataType::HALF_FLOAT_16, resolution, bbox, std::nullopt )
+        : Volume(Voxel::DataType::HALF_FLOAT_16, resolution, bbox, std::nullopt)
     {
-        if (!initValue.has_value())
-            Volume::init(0.0f);
-        else
-            Volume::init(*initValue);
+        Volume::init(initValue ? 0.0f : *initValue);
     }
 
     HalfFloatVolume::HalfFloatVolume(const Vec3ui& resolution, const float* initialData)
-        : Volume(Voxel::DataType::HALF_FLOAT_16, resolution, std::nullopt )
+        : Volume(Voxel::DataType::HALF_FLOAT_16, resolution, std::nullopt)
     {
         init(initialData);
     }

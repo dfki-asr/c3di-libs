@@ -1,14 +1,12 @@
-#include "stdafx.h"
-
 #include "gtest/gtest.h"
-#include <algorithm/VectorAlgorithms.h>
+#include <libmmv/algorithm/VectorAlgorithms.h>
 
-namespace ettention
+namespace libmmv
 {
     class VectorAlgorithmsTest : public ::testing::Test {};
 }
 
-using namespace ettention;
+using namespace libmmv;
 
 TEST_F(VectorAlgorithmsTest, TestSplitString_Default)
 {

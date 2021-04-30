@@ -1,9 +1,7 @@
-#include "stdafx.h"
+#include "libmmv/evaluation/RootMeanSquareError.h"
+#include "libmmv/algorithm/NumericalAlgorithms.h"
 
-#include "RootMeanSquareError.h"
-#include "algorithm/NumericalAlgorithms.h"
-
-namespace ettention
+namespace libmmv
 {
     RootMeanSquareError::RootMeanSquareError()
     {
@@ -19,11 +17,11 @@ namespace ettention
         std::size_t realNumberOfElements = 0;
         for(unsigned int i = 0; i < numberOfElements; i++)
         {
-            if(std::isfinite(data1[i]) ^ std::isfinite(data2[i]))
+            if(!isinf(data1[i]) && !isinf(data2[i]))
             {
                 throw std::runtime_error("Found infinite value which corresponding value is finite!");
             }
-            else if(std::isfinite(data1[i]))
+            else if(!isinf(data1[i]))
             {
                 ++realNumberOfElements;
                 rmsError += (data1[i] - data2[i]) * (data1[i] - data2[i]);

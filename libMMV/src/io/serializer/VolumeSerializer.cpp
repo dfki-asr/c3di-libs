@@ -1,9 +1,7 @@
-#include "stdafx.h"
+#include "libmmv/io/serializer/VolumeSerializer.h"
+#include "libmmv/io/serializer/MRCWriter.h"
 
-#include "io/serializer/VolumeSerializer.h"
-#include "io/serializer/MRCWriter.h"
-
-namespace ettention
+namespace libmmv
 {
     VolumeSerializer::VolumeSerializer()
     {
@@ -27,8 +25,13 @@ namespace ettention
         if(formatEntry != fileFormats.end())
             return formatEntry->second;
 
-        std::filesystem::path filepath(outputVolumeFileName);
-        specifiedExtension = filepath.extension().string();
+        size_t idx = outputVolumeFileName.rfind('.');
+        if (idx != std::string::npos) {
+            specifiedExtension = outputVolumeFileName.substr(idx+1);
+        }
+        else {
+            specifiedExtension = "No extension found in filename";
+        }
 
         formatEntry = fileFormats.find(specifiedExtension);
         if(formatEntry == fileFormats.end())

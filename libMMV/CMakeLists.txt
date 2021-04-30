@@ -1,35 +1,46 @@
-cmake_minimum_required(VERSION 2.8)
-project(libMMV)
+cmake_minimum_required(VERSION 3.10)
 
-SwitchOnCpp11()
-add_definitions(/D_USE_MATH_DEFINES)
+set(LIBMMV_LIBRARY_NAME libmmv)
+project(${LIBMMV_LIBRARY_NAME})
 
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
+
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+include(GetSourceFiles)
 # find all directories containing source files
-set(FILE_TYPES *.c *.cc *.cpp *.h *.hpp *.tcc)
-find_directories(DIRS src "${FILE_TYPES}")
+set(FILE_TYPES *.c *.cpp *.h *.hpp)
+find_directories(INCLUDE_DIRS include "${FILE_TYPES}")
+find_directories(SRC_DIRS src "${FILE_TYPES}")
+set(DIRS ${SRC_DIRS} ${INCLUDE_DIRS})
 generate_source_tree(HOST_SOURCES "${DIRS}" "${FILE_TYPES}")
 
-# this is for other tools to have access to libReconstruction headers
-set(LIBMMV_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src")
+if(MSVC)
+	# export all symbols for a shared library
+	set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS 1)
+endif(MSVC)
+add_library(${LIBMMV_LIBRARY_NAME} SHARED ${HOST_SOURCES})
+
+# include dependencis and link libraries
+set(ETTENTION_DEPENDENCIES_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/dependencies")
+find_package(FreeImage REQUIRED)
+set(LIBMMV_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include")
 set(LIBMMV_INCLUDE_DIR ${LIBMMV_INCLUDE_DIR} PARENT_SCOPE)
 
-# set include directories
-include_directories("${MEMORYMANAGER_INCLUDE_DIR}"
-                    "${GTEST_INCLUDE_DIR}"
-                    "${FREEIMAGE_INCLUDE_DIR}"
-                    "${LIBMMV_INCLUDE_DIR}"													
-					)
+target_include_directories(${LIBMMV_LIBRARY_NAME} PUBLIC "${LIBMMV_INCLUDE_DIR}" "${FREEIMAGEPLUS_INCLUDE_PATH}")
+target_link_libraries(${LIBMMV_LIBRARY_NAME} "${FREEIMAGEPLUS_LIBRARIES}")
 
-add_library(${PROJECT_NAME} STATIC ${HOST_SOURCES} )
+# copy dependent DLLs to executable directory after building the target
+# using MSVC compiler (usually on Windows platform)
+if(MSVC)
+	add_custom_command(TARGET ${LIBMMV_LIBRARY_NAME} POST_BUILD
+					   COMMAND ${CMAKE_COMMAND} -E
+					   make_directory "${CMAKE_BINARY_DIR}/$<CONFIG>")
+	add_custom_command(TARGET ${LIBMMV_LIBRARY_NAME} POST_BUILD
+					   COMMAND ${CMAKE_COMMAND} -E
+					   copy "${FREEIMAGE_ROOT_DIR}/lib/x64/FreeImage.dll"
+							"${FREEIMAGE_ROOT_DIR}/lib/x64/FreeImagePlus.dll"
+							"${CMAKE_BINARY_DIR}/$<CONFIG>/")
+endif(MSVC)
 
-target_link_libraries(${PROJECT_NAME}
-                      MemoryManager
-                      debug
-                      "${FREEIMAGE_LIBRARIES_DEBUG}"
-                      optimized
-                      "${FREEIMAGE_LIBRARIES_RELEASE}"
-                      ${GTEST_BOTH_LIBRARIES}
-                      )
-
-# precompiled headers
-add_precompiled_header(${PROJECT_NAME} stdafx.h)
+add_subdirectory(test)

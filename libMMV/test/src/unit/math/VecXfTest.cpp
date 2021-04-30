@@ -1,18 +1,16 @@
-#include "stdafx.h"
-
 #include "gtest/gtest.h"
 
-#include "math/Vec3.h"
-#include "math/Vec4.h"
+#include "libmmv/math/Vec3.h"
+#include "libmmv/math/Vec4.h"
 
-namespace ettention
+namespace libmmv
 {
 	class VecXfTest : public ::testing::Test 
 	{
 	};
 }
 
-using namespace ettention;
+using namespace libmmv;
 
 TEST_F(VecXfTest, ElementWiseConstructor)
 {

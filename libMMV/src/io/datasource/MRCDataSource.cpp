@@ -1,23 +1,21 @@
-#include "stdafx.h"
+#include "libmmv/io/datasource/MRCDataSource.h"
+#include "libmmv/model/image/Image.h"
+#include "libmmv/io/datasource/ImageStackDataSource.h"
 
-#include "MRCDataSource.h"
-#include "model/image/Image.h"
-#include "io/datasource/ImageStackDataSource.h"
-
-namespace ettention
+namespace libmmv
 {
     MRCDataSource::MRCDataSource()
     {
     }
 
-    MRCDataSource::MRCDataSource(const std::filesystem::path& stackFilePath, bool logaritmizeData)
+    MRCDataSource::MRCDataSource(const std::string& stackFilePath, bool logaritmizeData)
         : stackFilePath(stackFilePath)
         , logaritmizeData(logaritmizeData)
     {
         init();
     }
 
-    MRCDataSource::MRCDataSource(const std::filesystem::path& stackFilePath, const std::filesystem::path& tiltFilePath, bool logaritmizeData)
+    MRCDataSource::MRCDataSource(const std::string& stackFilePath, const std::string& tiltFilePath, bool logaritmizeData)
         : stackFilePath(stackFilePath)
         , logaritmizeData(logaritmizeData)
     {
@@ -37,12 +35,12 @@ namespace ettention
         return "MRCDataSource";
     }
 
-    ettention::HyperStackIndex MRCDataSource::firstIndex() const
+    libmmv::HyperStackIndex MRCDataSource::firstIndex() const
     {
         return HyperStackIndex(0);
     }
 
-    ettention::HyperStackIndex MRCDataSource::lastIndex() const
+    libmmv::HyperStackIndex MRCDataSource::lastIndex() const
     {
         return HyperStackIndex(numberOfProjections - 1);
     }
@@ -132,7 +130,7 @@ namespace ettention
             file.read((char*)&value, sizeof(_T));
             if(!file.good())
             {
-				throw std::ios_base::failure("Error reading " + std::to_string(voxelCount) + " voxel value(s) from " + stackFilePath.string() + "!");
+				throw std::ios_base::failure("Error reading " + std::to_string(voxelCount) + " voxel value(s) from " + stackFilePath + "!");
             }
             dataMax = std::max((float)value, dataMax);
             dataMin = std::min((float)value, dataMin);
@@ -141,11 +139,10 @@ namespace ettention
 
     void MRCDataSource::init()
     {
-        std::string path = stackFilePath.string();
-        file.open(path, std::ios::binary);
+        file.open(stackFilePath, std::ios::binary);
         if(!file.good())
         {
-            throw std::ios_base::failure( "Could not open MRC stack" + stackFilePath.string() );
+            throw std::ios_base::failure("Could not open MRC stack "+ stackFilePath);
         }
         file.read((char*)&mrcHeader, sizeof(MRCHeader));
         file.ignore(mrcHeader.extra);
@@ -167,9 +164,9 @@ namespace ettention
             this->getDataRange<unsigned short>();
             break;
         default:
-            std::stringstream message;
-            message << "Format of the MRC stack is either unknown or not supported (mode " << mrcHeader.mode << ")";
-            throw std::ios_base::failure( message.str() );
+            std::ostringstream err;
+            err << "Format of the MRC stack is either unknown or not supported (mode " << mrcHeader.mode << ")";
+            throw std::ios_base::failure(err.str());
         }
 
         if(mrcHeader.mode == 1 || mrcHeader.mode == 2)

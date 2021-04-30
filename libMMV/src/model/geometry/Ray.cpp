@@ -1,7 +1,6 @@
-#include "stdafx.h"
-#include "Ray.h"
+#include "libmmv/model/geometry/Ray.h"
 
-namespace ettention
+namespace libmmv
 {
     static const float MINIMUM_DIRECTION_LENGTH = 1e-6f;
 

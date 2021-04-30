@@ -1,13 +1,11 @@
-#include "stdafx.h"
-
 #include "gtest/gtest.h"
-#include <algorithm/NumericalAlgorithms.h>
-#include <math/Float16Compressor.h>
+#include "libmmv/algorithm/NumericalAlgorithms.h"
+#include "libmmv/math/Float16Compressor.h"
 #include <cmath>
 
 #define EPS 1e-5f
 
-using namespace ettention;
+using namespace libmmv;
 
 class NumericalAlgorithmsTest : public ::testing::Test
 {

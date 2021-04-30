@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.10)
 
 include(CommonFlags)
 include(GetSourceFiles)
@@ -11,37 +11,40 @@ SwitchOnCpp11()
 add_definitions(/D_USE_MATH_DEFINES)
 add_definitions(/DTESTDATA_DIR=\"${CMAKE_CURRENT_SOURCE_DIR}\")
 
-# find all directories containing project files
+set(LIBMMV_UNIT_TEST_NAME libmmvUnitTest)
+project(${LIBMMV_UNIT_TEST_NAME})
+
+# find all directories containing source files
+set(TEST_SOURCE_DIR "src/unit")
 set(FILE_TYPES *.c *.cpp *.h *.hpp)
 find_directories(DIRS ${TEST_SOURCE_DIR} "${FILE_TYPES}")
-# generate source tree
 generate_source_tree(HOST_SOURCES "${DIRS}" "${FILE_TYPES}")
+add_executable(${LIBMMV_UNIT_TEST_NAME} ${HOST_SOURCES})
 
 set(MMV_TEST_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src")
-
-# set include directories
-include_directories("${MMV_TEST_INCLUDE_DIR}"
-					"${GTEST_INCLUDE_DIR}"
-					"${MEMORYMANAGER_INCLUDE_DIR}"
-					"${LIBMMV_INCLUDE_DIR}"
-					"${FREEIMAGE_INCLUDE_DIR}"
-					)
-
-source_group("Console sources" FILES ${SOURCES_CONSOLEAPP})
-
-add_executable(${PROJECT_NAME}
-			   ${HOST_SOURCES}
+target_include_directories(
+		${LIBMMV_UNIT_TEST_NAME} 
+		PRIVATE 
+		"${MMV_TEST_INCLUDE_DIR}" 
+		"${LIBMMV_INCLUDE_DIR}" 
+		"${FREEIMAGEPLUS_INCLUDE_PATH}"
+)
+		
+target_link_libraries(
+	${LIBMMV_UNIT_TEST_NAME} 
+	PRIVATE 
+	${LIBMMV_LIBRARY_NAME} 
+	gtest 
+	"${FREEIMAGEPLUS_LIBRARIES}"
 )
 
-target_link_libraries(${PROJECT_NAME}
-			libMMV
-			${GTEST_BOTH_LIBRARIES}
-			)
-
 if(CMAKE_COMPILER_IS_GNUCC)
-	target_link_libraries(${PROJECT_NAME} pthread)
-endif(CMAKE_COMPILER_IS_GNUCC)
+	target_link_libraries(${PROJECT_NAME} PRIVATE pthread)
 
-add_precompiled_header(${PROJECT_NAME} stdafx.h)
+    # if gcc version <9 we also need to link the stdc++fs library to support c++17's filesystem extension
+    IF (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 9.0)
+        target_link_libraries(${PROJECT_NAME} PRIVATE stdc++fs)
+    ENDIF()
+endif(CMAKE_COMPILER_IS_GNUCC)
 
 CopyDlls()

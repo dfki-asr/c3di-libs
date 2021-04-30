@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.10)
 
-project(libMMVUnitTest)
+project(libmmvUnitTest)
 
 set(TEST_SOURCE_DIR "src/unit")
 INCLUDE(CMakeTests.txt)
