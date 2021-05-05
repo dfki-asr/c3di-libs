@@ -9,7 +9,6 @@
 namespace libmmv
 {
     class Image;
-    class GPUMappedVolume;
     class SubVolume;
 
     class Volume
@@ -76,6 +75,7 @@ namespace libmmv
 
         virtual void init(float initialValue);
 
+    public:
         virtual void* getRawPointerOfVoxel(const Vec3ui& voxel) const;
         virtual void* getRawPointerOfVoxel(size_t index) const;
 
