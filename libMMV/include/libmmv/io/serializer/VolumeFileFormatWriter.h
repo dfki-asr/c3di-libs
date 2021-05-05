@@ -4,9 +4,13 @@
 
 #include "libmmv/io/IOEnumerations.h"
 
-namespace libmmv
+namespace libCFG
 {
     class OutputParameterSet;
+}
+
+namespace libmmv
+{
     class RangeTransformation;
     class VolumeProperties;
     class Volume;
