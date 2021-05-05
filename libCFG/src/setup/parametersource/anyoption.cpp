@@ -59,9 +59,15 @@
  * leading to exception when mixing different options types
  */
 
-#include "libCFG/setup/parametersource/anyoption.h"
+#include "anyoption.h"
 
 AnyOption::AnyOption() { init(); }
+
+AnyOption::AnyOption(std::string title)
+{
+    setOptionTitle(title);
+    init();
+}
 
 AnyOption::AnyOption(int maxopt) { init(maxopt, maxopt); }
 
@@ -78,7 +84,7 @@ void AnyOption::init(int maxopt, int maxcharopt) {
 
   max_options = maxopt;
   max_char_options = maxcharopt;
-  max_usage_lines = DEFAULT_MAXUSAGE;
+  max_usage_lines = maxopt + maxcharopt;
   usage_lines = 0;
   argc = 0;
   argv = NULL;
@@ -106,7 +112,7 @@ void AnyOption::init(int maxopt, int maxcharopt) {
   whitespace = ' ';
   nullterminate = '\0';
   set = false;
-  once = true;
+  once = false;
   hasoptions = false;
   autousage = false;
   print_usage = false; 
@@ -332,7 +338,6 @@ void AnyOption::useCommandArgs(int _argc, char **_argv) {
   argc = _argc;
   argv = _argv;
   command_set = true;
-  appname = argv[0];
   if (argc > 1)
     hasoptions = true;
 }
@@ -499,6 +504,17 @@ void AnyOption::processOptions() {
     return;
 }
 
+void AnyOption::processCommandArgs(std::vector<std::string> argvs) {
+    int counts = static_cast<int>(argvs.size());
+    char** argv = (char**)malloc(counts * sizeof(char*));
+    for (int i = 0; i < argvs.size(); ++i)
+    {
+        argv[i] = (char*)malloc(sizeof(char) * argvs[i].size() + 1);
+        strcpy(argv[i], argvs[i].c_str());
+    }
+    processCommandArgs(counts, argv);
+}
+
 void AnyOption::processCommandArgs(int max_args) {
   max_legal_args = max_args;
   processCommandArgs();
@@ -521,7 +537,7 @@ void AnyOption::processCommandArgs() {
   if (max_legal_args == 0)
     max_legal_args = argc;
   new_argv = (int *)malloc((max_legal_args + 1) * sizeof(int));
-  for (int i = 1; i < argc; i++) { /* ignore first argv */
+  for (int i = 0; i < argc; i++) {
     if (argv[i][0] == long_opt_prefix[0] &&
         argv[i][1] == long_opt_prefix[1]) { /* long GNU option */
       int match_at = parseGNU(argv[i] + 2); /* skip -- */
@@ -685,6 +701,16 @@ char *AnyOption::getValue(const char *option) {
   return NULL;
 }
 
+char* AnyOption::getValue(char option) {
+    if (!valueStoreOK())
+        return NULL;
+    for (int i = 0; i < optchar_counter; i++) {
+        if (optionchars[i] == option)
+            return values[optcharindex[i]];
+    }
+    return NULL;
+}
+
 bool AnyOption::getFlag(const char *option) {
   if (!valueStoreOK())
     return false;
@@ -693,16 +719,6 @@ bool AnyOption::getFlag(const char *option) {
       return findFlag(values[optionindex[i]]);
   }
   return false;
-}
-
-char *AnyOption::getValue(char option) {
-  if (!valueStoreOK())
-    return NULL;
-  for (int i = 0; i < optchar_counter; i++) {
-    if (optionchars[i] == option)
-      return values[optcharindex[i]];
-  }
-  return NULL;
 }
 
 bool AnyOption::getFlag(char option) {
@@ -742,6 +758,20 @@ bool AnyOption::setValue(const char *option, char *value) {
   return false;
 }
 
+bool AnyOption::setValue(char option, char *value) {
+	if (!valueStoreOK())
+		return false;
+	for (int i = 0; i < optchar_counter; i++) {
+		if (optionchars[i] == option) {
+			size_t length = (strlen(value) + 1) * sizeof(char);
+			allocValues(optcharindex[i], length);
+			strncpy(values[optcharindex[i]], value, length);
+			return true;
+		}
+	}
+	return false;
+}
+
 bool AnyOption::setFlagOn(const char *option) {
   if (!valueStoreOK())
     return false;
@@ -750,20 +780,6 @@ bool AnyOption::setFlagOn(const char *option) {
       size_t length = (strlen(TRUE_FLAG) + 1) * sizeof(char);
       allocValues(optionindex[i], length);
       strncpy(values[optionindex[i]], TRUE_FLAG, length);
-      return true;
-    }
-  }
-  return false;
-}
-
-bool AnyOption::setValue(char option, char *value) {
-  if (!valueStoreOK())
-    return false;
-  for (int i = 0; i < optchar_counter; i++) {
-    if (optionchars[i] == option) {
-      size_t length = (strlen(value) + 1) * sizeof(char);
-      allocValues(optcharindex[i], length);
-      strncpy(values[optcharindex[i]], value, length);
       return true;
     }
   }
@@ -1001,6 +1017,14 @@ void AnyOption::addUsage(const char *line) {
   }
   usage[usage_lines] = line;
   usage_lines++;
+}
+
+void AnyOption::printHelp()
+{
+	cout << title << endl;
+	for (int i = 0; i < usage_lines; i++)
+		cout << usage[i] << endl;
+	cout << endl;
 }
 
 void AnyOption::addUsageError(const char *line) {

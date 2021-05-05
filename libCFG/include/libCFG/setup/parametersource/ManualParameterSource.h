@@ -12,7 +12,7 @@ namespace libCFG
         ~ManualParameterSource();
 
         void setParameter(std::string name, std::string value, std::string type );
-
+        virtual void parse(int argc = 0, char** argv = nullptr) override;
         virtual bool parameterExists(std::string aName) const override;
         virtual std::string getStringParameter(std::string aName) const override;
  

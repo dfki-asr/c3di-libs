@@ -23,11 +23,14 @@ namespace libCFG
         virtual LogLevel getLogLevel() const;
         virtual void setLogLevel(const LogLevel level);
 
-        virtual void parse() = 0;
+        virtual void parse(int argc = 0, char** argv = nullptr) = 0;
 
         virtual bool parameterExists(std::string aName) const = 0;
+        virtual bool parameterExists(char c) const;
 
         virtual std::string getStringParameter(std::string aName) const = 0;
+        virtual std::string getStringParameter(char c) const;
+
         virtual std::filesystem::path getPathParameter(std::string aName) const;
 
         virtual float getFloatParameter(std::string aName) const;

@@ -12,6 +12,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <string>
+#include <vector>
 
 #define COMMON_OPT 1
 #define COMMAND_OPT 2
@@ -40,10 +41,12 @@ class AnyOption {
 
 public: /* the public interface */
   AnyOption();
-
+  AnyOption(std::string title);
   explicit AnyOption(int maxoptions);
   explicit AnyOption(int maxoptions, int maxcharoptions);
   ~AnyOption();
+
+  void setOptionTitle(const std::string newtitle) { title = newtitle; }
 
   /*
    * following set methods specifies the
@@ -59,7 +62,7 @@ public: /* the public interface */
   /*
    * provide the input for the options
    * like argv[] for commnd line and the
-   * option file name  to use;
+   * option file name to use;
    */
 
   void useCommandArgs(int _argc, char **_argv);
@@ -128,6 +131,7 @@ public: /* the public interface */
    * useCommandArgs() and useFileName();
    */
   void processOptions();
+  void processCommandArgs(std::vector<std::string> args);
   void processCommandArgs();
   void processCommandArgs(int max_args);
   bool processFile();
@@ -199,6 +203,7 @@ private:                /* the hidden data structure */
   int max_usage_lines; /* max usage lines reserved */
   int usage_lines;     /* number of usage lines */
 
+  std::string title = "program options";
   bool command_set;   /* if argc/argv were provided */
   bool file_set;      /* if a filename was provided */
   bool mem_allocated; /* if memory allocated in init() */

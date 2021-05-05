@@ -2,17 +2,18 @@
 
 #include <iostream>
 #include <fstream>
-
+#include <vector>
 #include "libmmv/algorithm/FileAlgorithms.h"
 #include "libmmv/algorithm/VectorAlgorithms.h"
 
 namespace libCFG
 {
+
     XMLParameterSource::XMLParameterSource(const std::string filename)
         : xmlFilename(filename)
     {
-        setLogLevel(ParameterSource::LogLevel::OVERALL_PROGRESS);
         parse();
+        setLogLevel(ParameterSource::LogLevel::OVERALL_PROGRESS);
     }
 
     XMLParameterSource::~XMLParameterSource()
@@ -35,7 +36,7 @@ namespace libCFG
     {
         auto property_path = libmmv::VectorAlgorithms::splitString(parameterName, ".");
         std::string property = property_path[0];
-        rapidxml::xml_node<>* node = xml_document.first_node( &property[0] );
+        rapidxml::xml_node<>* node = xml_document.first_node(property.c_str());
         if (node == nullptr)
             return false;
         for (size_t i = 1; i < property_path.size(); i++)
@@ -46,7 +47,7 @@ namespace libCFG
                 return false;
         }
         return true;
-    };
+    }
 
     std::string XMLParameterSource::getStringParameter(std::string parameterName)  const
     {
@@ -65,13 +66,11 @@ namespace libCFG
         return node->first_attribute("value")->value();
     };
 
-    void XMLParameterSource::parse()
+    void XMLParameterSource::parse(int argc, char** argv)
     {
         std::ifstream ifs(xmlFilename);
-        xmlFileContent = std::string( (std::istreambuf_iterator<char>(ifs)),
-                                      (std::istreambuf_iterator<char>() ));
-
-        xml_document.parse<0>( &xmlFileContent[0] );
+        file_content = std::string((std::istreambuf_iterator<char>(ifs)), (std::istreambuf_iterator<char>()));
+        xml_document.parse<0>(&file_content[0]);
     }
 
     std::filesystem::path XMLParameterSource::extendRelativeToXMLPath(std::filesystem::path path) const

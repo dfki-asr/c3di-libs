@@ -1,5 +1,4 @@
 #include "libCFG/setup/parametersource/CascadingParameterSource.h"
-
 #include "libCFG/error/ParameterNotFoundException.h"
 
 namespace libCFG
@@ -120,16 +119,16 @@ namespace libCFG
         throw ParameterNotFoundException(aName);
     }
 
-    void CascadingParameterSource::parse()
+    void CascadingParameterSource::parse(int argc, char** argv)
     {
-        parseAll();
+        parseAll(argc, argv);
     }
 
-    void CascadingParameterSource::parseAll()
+    void CascadingParameterSource::parseAll(int argc, char** argv)
     {
         for( auto it = sources.begin(); it != sources.end(); ++it )
         {
-            (*it)->parse();
+            (*it)->parse(argc, argv);
         }
     }
 

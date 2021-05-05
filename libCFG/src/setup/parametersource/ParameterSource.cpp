@@ -21,6 +21,16 @@ namespace libCFG
         this->logLevel = level;
     }
 
+    bool ParameterSource::parameterExists(char c) const
+    {
+        return parameterExists(std::string(1, c));
+    }
+
+    std::string ParameterSource::getStringParameter(char c) const
+    {
+        return getStringParameter(std::string(1, c));
+    }
+
     std::filesystem::path ParameterSource::getPathParameter(std::string aName) const
     {
         std::string strValue = getStringParameter(aName);
@@ -37,9 +47,9 @@ namespace libCFG
     {
         std::string strValue = getStringParameter(aName);
         std::transform(strValue.begin(), strValue.end(), strValue.begin(), ::tolower);
-        if (strValue == "true")
+        if (strValue == "true" || strValue == "1")
             return true;
-        if (strValue == "false")
+        if (strValue == "false" || strValue == "0")
             return false;
         throw std::runtime_error("illegal parameter format, expect true/false");
     }

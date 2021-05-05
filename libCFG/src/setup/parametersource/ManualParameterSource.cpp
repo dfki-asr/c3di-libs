@@ -1,4 +1,4 @@
-#include "libCFG/setup/parametersource/ManualParameterSource.h"
+﻿#include "libCFG/setup/parametersource/ManualParameterSource.h"
 
 namespace libCFG
 {
@@ -9,6 +9,10 @@ namespace libCFG
 
     ManualParameterSource::~ManualParameterSource()
     {
+    }
+
+	void ManualParameterSource::parse(int argc, char** argv)
+	{
     }
 
     void ManualParameterSource::setParameter(std::string name, std::string value, std::string type)
@@ -27,7 +31,8 @@ namespace libCFG
         auto iterator = parameter.find(aName);
         if (iterator == parameter.end() )
             throw std::runtime_error("no such parameter exception");
-        return iterator->first;
+        std::pair<std::string, std::string> vlaueTypePair = iterator->second;
+        std::string parameter = vlaueTypePair.first;
+        return parameter;
     }
-
 }
