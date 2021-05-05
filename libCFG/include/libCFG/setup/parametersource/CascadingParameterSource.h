@@ -2,9 +2,9 @@
 
 #include <list>
 
-#include "setup/parametersource/ParameterSource.h"
+#include "libCFG/setup/parametersource/ParameterSource.h"
 
-namespace ettention
+namespace libCFG
 {
     class CascadingParameterSource : public ParameterSource
     {

@@ -59,7 +59,7 @@
  * leading to exception when mixing different options types
  */
 
-#include "anyoption.h"
+#include "libCFG/setup/parametersource/anyoption.h"
 
 AnyOption::AnyOption() { init(); }
 

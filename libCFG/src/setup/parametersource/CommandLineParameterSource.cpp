@@ -1,10 +1,8 @@
-#include "CommandLineParameterSource.h"
+#include "libCFG/setup/parametersource/CommandLineParameterSource.h"
+#include "libCFG/setup/parametersource/anyoption.h"
+#include "libCFG/error/ParameterNotFoundException.h"
 
-#include "anyoption.h"
-
-#include "error/ParameterNotFoundException.h"
-
-namespace ettention
+namespace libCFG
 {
     CommandLineParameterSource::CommandLineParameterSource(int argc, char** argv)
         : argc(argc), argv(argv)

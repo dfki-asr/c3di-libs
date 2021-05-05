@@ -1,4 +1,4 @@
-#include "XMLParameterSource.h"
+#include "libCFG/setup/parametersource/XMLParameterSource.h"
 
 #include <iostream>
 #include <fstream>
@@ -6,9 +6,8 @@
 #include "libmmv/algorithm/FileAlgorithms.h"
 #include "libmmv/algorithm/VectorAlgorithms.h"
 
-namespace ettention
+namespace libCFG
 {
-
     XMLParameterSource::XMLParameterSource(const std::string filename)
         : xmlFilename(filename)
     {

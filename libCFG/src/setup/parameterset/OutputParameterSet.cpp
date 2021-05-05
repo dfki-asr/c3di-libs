@@ -1,10 +1,10 @@
-#include "OutputParameterSet.h"
-#include "setup/parametersource/ParameterSource.h"
+#include "libCFG/setup/parameterset/OutputParameterSet.h"
+#include "libCFG/setup/parametersource/ParameterSource.h"
 #include "libmmv/model/volume/FloatVolume.h"
 #include <fstream>
 #include <cstdio>
 
-namespace ettention
+namespace libCFG
 {
     OutputParameterSet::OutputParameterSet(libmmv::VoxelValueType voxelValueType, libmmv::CoordinateOrder orientation, bool invert)
         : voxelType(voxelValueType)

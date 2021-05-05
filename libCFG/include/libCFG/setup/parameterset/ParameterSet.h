@@ -1,6 +1,6 @@
 #pragma once
 
-namespace ettention
+namespace libCFG
 {
     class ParameterSet
     {

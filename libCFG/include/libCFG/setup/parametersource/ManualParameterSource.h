@@ -1,10 +1,9 @@
 #pragma once
 
-#include "setup/parametersource/ParameterSource.h"
-
+#include "libCFG/setup/parametersource/ParameterSource.h"
 #include <map>
 
-namespace ettention
+namespace libCFG
 {
     class ManualParameterSource : public ParameterSource
     {

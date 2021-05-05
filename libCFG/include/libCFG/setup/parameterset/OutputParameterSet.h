@@ -2,11 +2,11 @@
 
 #include <filesystem>
 
-#include "setup/parameterset/ParameterSet.h"
+#include "libCFG/setup/parameterset/ParameterSet.h"
 #include "libmmv/io/IOEnumerations.h"
 #include "libmmv/io/serializer/VolumeSerializer.h"
 
-namespace ettention
+namespace libCFG
 {
     class ParameterSource;
 

@@ -2,7 +2,7 @@
 
 #include  <stdexcept>
 
-namespace ettention
+namespace libCFG
 {
     class ParameterNotFoundException : public std::runtime_error
     {

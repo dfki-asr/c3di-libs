@@ -1,6 +1,6 @@
-#include "ManualParameterSource.h"
+#include "libCFG/setup/parametersource/ManualParameterSource.h"
 
-namespace ettention
+namespace libCFG
 {
 
     ManualParameterSource::ManualParameterSource()

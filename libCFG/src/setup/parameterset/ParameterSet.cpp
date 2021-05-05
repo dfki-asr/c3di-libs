@@ -1,6 +1,6 @@
-#include "ParameterSet.h"
+#include "libCFG/setup/parameterset/ParameterSet.h"
 
-namespace ettention
+namespace libCFG
 {
     ParameterSet::ParameterSet()
     {

@@ -1,10 +1,10 @@
 #pragma once
 
-#include "setup/parametersource/ParameterSource.h"
+#include "libCFG/setup/parametersource/ParameterSource.h"
 
 class AnyOption;
 
-namespace ettention
+namespace libCFG
 {  
     class CommandLineParameterSource : public ParameterSource
     {

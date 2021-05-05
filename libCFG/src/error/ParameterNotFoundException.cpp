@@ -1,6 +1,6 @@
-#include "ParameterNotFoundException.h"
+#include "libCFG/error/ParameterNotFoundException.h"
 
-namespace ettention
+namespace libCFG
 {
     ParameterNotFoundException::ParameterNotFoundException(std::string parameter)
         : std::runtime_error(std::string("parameter not found: ") + parameter), parameter(parameter)

@@ -1,8 +1,8 @@
-#include "CascadingParameterSource.h"
+#include "libCFG/setup/parametersource/CascadingParameterSource.h"
 
-#include "error/ParameterNotFoundException.h"
+#include "libCFG/error/ParameterNotFoundException.h"
 
-namespace ettention
+namespace libCFG
 {
     CascadingParameterSource::CascadingParameterSource()
     {

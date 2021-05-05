@@ -1,11 +1,10 @@
 #pragma once
 
 #include <filesystem>
-
 #include "libmmv/math/Vec2.h"
 #include "libmmv/math/Vec3.h"
 
-namespace ettention
+namespace libCFG
 {
     class ParameterSource
     {
