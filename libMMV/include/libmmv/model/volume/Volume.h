@@ -14,7 +14,6 @@ namespace libmmv
 
     class Volume
     {
-        friend class GPUMappedVolume;
         friend class SubVolume;
 
     protected:
