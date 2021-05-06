@@ -1,12 +1,12 @@
 #include <iostream>
-#include "MemoryManager.h"
-#include "MemoryListener.h"
+#include "memoryManager/memory/MemoryManager.h"
+#include "memoryManager/memory/MemoryListener.h"
 #ifdef _WINDOWS
 #include <sstream>
 #include <windows.h>
 #endif
 
-namespace ettention
+namespace memoryManager
 {
     MemoryManager::MemoryManager() :
         locked(true),

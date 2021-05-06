@@ -1,7 +1,7 @@
-#include "MemoryLeakDetection.h"
-#include "MemoryManager.h"
+#include "memoryManager/memory/MemoryLeakDetection.h"
+#include "memoryManager/memory/MemoryManager.h"
 
-namespace ettention
+namespace memoryManager
 {
     DLL_FLAG void* MyAlloc(size_t size, const char* file, int line)
     {

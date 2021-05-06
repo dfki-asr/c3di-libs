@@ -3,7 +3,7 @@
 #include <vector>
 #include "MemoryLeakDetection.h"
 
-namespace ettention
+namespace memoryManager
 {
     class MemoryListener;
 

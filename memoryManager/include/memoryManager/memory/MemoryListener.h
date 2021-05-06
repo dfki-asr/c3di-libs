@@ -2,7 +2,7 @@
 #include "MemoryManager.h"
 #include <unordered_set>
 
-namespace ettention
+namespace memoryManager
 {
     class DLL_FLAG MemoryListener final
     {

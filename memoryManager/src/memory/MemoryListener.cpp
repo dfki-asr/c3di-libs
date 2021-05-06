@@ -1,8 +1,8 @@
 #include <sstream>
 #include <algorithm>
-#include "MemoryListener.h"
+#include "memoryManager/memory/MemoryListener.h"
 
-namespace ettention
+namespace memoryManager
 {
     const int MemoryListener::MAX_LEAKS_TO_BE_PRINTED = 42;
 

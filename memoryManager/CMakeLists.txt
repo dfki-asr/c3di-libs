@@ -15,7 +15,9 @@ find_directories(DIRS src "${FILE_TYPES}")
 generate_source_tree(HOST_SOURCES "${DIRS}" "${FILE_TYPES}")
 
 # this is for other tools to have access to memoryManager headers
-set(MEMORYMANAGER_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src")
+set(MEMORYMANAGER_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include")
 set(MEMORYMANAGER_INCLUDE_DIR ${MEMORYMANAGER_INCLUDE_DIR} PARENT_SCOPE)
 
+
 add_library(${PROJECT_NAME} SHARED ${HOST_SOURCES})
+target_include_directories(${PROJECT_NAME} PUBLIC ${MEMORYMANAGER_INCLUDE_DIR})
