@@ -38,5 +38,5 @@ if(MSVC)
                         COMMAND ${CMAKE_COMMAND} -E copy
                                 "${FREEIMAGE_ROOT_DIR}/x64/FreeImage.dll"
                                 "${FREEIMAGE_ROOT_DIR}/x64/FreeImagePlus.dll"
-                                "${CMAKE_BINARY_DIR}/bin/$<CONFIG>/")
+                                "${EXECUTABLE_OUTPUT_PATH}/$<CONFIG>/")
 endif(MSVC)
