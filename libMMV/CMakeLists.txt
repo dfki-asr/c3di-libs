@@ -33,17 +33,4 @@ set(LIBMMV_INCLUDE_DIR ${LIBMMV_INCLUDE_DIR} PARENT_SCOPE)
 target_include_directories(${LIBMMV_LIBRARY_NAME} PUBLIC "${LIBMMV_INCLUDE_DIR}" "${FREEIMAGEPLUS_INCLUDE_PATH}")
 target_link_libraries(${LIBMMV_LIBRARY_NAME} PUBLIC "${FREEIMAGEPLUS_LIBRARIES}")
 
-# copy dependent DLLs to executable directory after building the target
-# using MSVC compiler (usually on Windows platform)
-if(MSVC)
-	add_custom_command(TARGET ${LIBMMV_LIBRARY_NAME} POST_BUILD
-					   COMMAND ${CMAKE_COMMAND} -E
-					   make_directory "${CMAKE_BINARY_DIR}/$<CONFIG>")
-	add_custom_command(TARGET ${LIBMMV_LIBRARY_NAME} POST_BUILD
-					   COMMAND ${CMAKE_COMMAND} -E
-					   copy "${FREEIMAGE_ROOT_DIR}/x64/FreeImage.dll"
-							"${FREEIMAGE_ROOT_DIR}/x64/FreeImagePlus.dll"
-							"${CMAKE_BINARY_DIR}/$<CONFIG>/")
-endif(MSVC)
-
 add_subdirectory(test)
