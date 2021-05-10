@@ -86,12 +86,22 @@ namespace libCFG
         return getVectorParameter<libmmv::Vec2f>(aName);
     }
 
+    std::vector<float> ParameterSource::getFloatVecParameter(std::string aName) const
+    {
+        std::string buffer = replaceCommasWithSpaces(getStringParameter(aName));
+        std::istringstream stream(buffer);
+        float f;
+        std::vector<float> result;
+        while (stream >> f)
+            result.push_back(f);
+        return result;
+    }
+
     std::string ParameterSource::replaceCommasWithSpaces(std::string str) const
     {
         std::replace(str.begin(), str.end(), ',', ' ');
         return str;
     }
-
 
     template<class TVECTOR>
     TVECTOR ParameterSource::getVectorParameter(std::string aName) const

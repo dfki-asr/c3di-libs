@@ -9,6 +9,12 @@ namespace libCFG
         options = new AnyOption();
     }
 
+    CommandLineParameterSource::CommandLineParameterSource(int argc, char** argv)
+        : argc(argc), argv(argv)
+    {
+        options = new AnyOption();
+    }
+
     CommandLineParameterSource::~CommandLineParameterSource()
     {
         delete options;

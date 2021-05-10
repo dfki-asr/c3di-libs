@@ -41,6 +41,7 @@ namespace libCFG
         virtual libmmv::Vec3ui getVec3uiParameter(std::string aName) const;
         virtual libmmv::Vec3f getVec3fParameter(std::string aName) const;
         virtual libmmv::Vec2f getVec2fParameter(std::string aName) const;
+        virtual std::vector<float> getFloatVecParameter(std::string aName) const;
 
     protected:
         std::string replaceCommasWithSpaces(std::string str) const;

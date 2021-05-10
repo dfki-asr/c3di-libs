@@ -12,6 +12,7 @@ namespace libCFG
     {
     public:
         CommandLineParameterSource();
+        CommandLineParameterSource(int argc, char** argv);
         virtual ~CommandLineParameterSource();
 
         virtual void parse(int argc = 0, char** argv = nullptr) override;
