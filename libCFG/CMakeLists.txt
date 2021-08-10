@@ -15,6 +15,14 @@ generate_source_tree(HOST_SOURCES "${DIRS}" "${FILE_TYPES}")
 set(LIBCFG_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include")
 set(LIBCFG_INCLUDE_DIR ${LIBCFG_INCLUDE_DIR} PARENT_SCOPE)
 
+# set include directories
+include_directories("${LIBCFG_INCLUDE_DIR}"
+                    "${LIBMMV_INCLUDE_DIR}"
+                    "${RAPID_XML_INCLUDE_DIR}"
+                    "${GTEST_INCLUDE_DIR}"
+                    "${MEMORYMANAGER_INCLUDE_DIR}"
+                    )
+
 IF(CMAKE_COMPILER_IS_GNUCXX)
 add_library(${PROJECT_NAME} SHARED ${HOST_SOURCES} )
 ELSE()
@@ -26,5 +34,5 @@ message(${LIBMMV_INCLUDE_DIR})
 target_include_directories(libCFG PUBLIC "${LIBCFG_INCLUDE_DIR}"
                     "${LIBMMV_INCLUDE_DIR}"
                     "${RAPID_XML_INCLUDE_DIR}"
-		    "${GTEST_INCLUDE_DIR}"
-		    "${MEMORYMANAGER_INCLUDE_DIR}")
+            "${GTEST_INCLUDE_DIR}"
+            "${MEMORYMANAGER_INCLUDE_DIR}")
