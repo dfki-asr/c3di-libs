@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <cstring>
+#include <cmath>
 #include "Vec2.h"
 #include "Vec3.h"
 
@@ -57,7 +58,7 @@ namespace libmmv
 
         Matrix3x3 inverse() {
             _ValType det = determinant();
-            if (abs(det) == 0)
+            if (std::abs(det) == 0)
             {
                 throw std::runtime_error("matrix not invertible");
             }
