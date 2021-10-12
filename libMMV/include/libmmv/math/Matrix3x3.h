@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <cstring>
+#include <cmath>
 #include "Vec2.h"
 #include "Vec3.h"
 
@@ -57,7 +58,7 @@ namespace libmmv
 
         Matrix3x3 inverse() {
             _ValType det = determinant();
-            if (abs(det) == 0)
+            if (std::abs(det) == 0)
             {
                 throw std::runtime_error("matrix not invertible");
             }
@@ -126,7 +127,7 @@ namespace libmmv
             return m;
         }
 
-    private:
+    protected:
 
         int indexOfMinor(int i, int droppedIndex) {
             if (i < droppedIndex)
@@ -146,7 +147,7 @@ namespace libmmv
                 at(r[0], c[1]) * at(r[1], c[0]);
         }
 
-        _ValType values[9];
+        _ValType values[9] = {0,0,0,0,0,0,0,0,0};
     };
 
     template<typename _ValType>
