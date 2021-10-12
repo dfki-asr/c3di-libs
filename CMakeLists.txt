@@ -13,6 +13,8 @@ add_subdirectory("gtest-1.10.0")
 set(GTEST_INCLUDE_DIR "gtest-1.10.0/include")
 enable_testing()
 
+set(LIBGTEST_INCLUDE_DIR "gtest-1.10.0/include" PARENT_SCOPE)
+
 # include cmake modules
 set(CMAKE_MODULE_PATH      ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
@@ -26,16 +28,21 @@ find_package(Dependencies)
 
 # memory manager
 add_subdirectory(memoryManager)
+set(LIBMEMORYMANAGER_INCLUDE_DIR ${MEMORYMANAGER_INCLUDE_DIR} PARENT_SCOPE)
 
 # lib MMV
 add_subdirectory(libMMV)
+set(LIBMMV_INCLUDE_DIR ${LIBMMV_INCLUDE_DIR} PARENT_SCOPE)
 
 # lib Thread Pool
 add_subdirectory(libThreadPool)
+set(LIBTP_INCLUDE_DIR ${LIBTP_INCLUDE_DIR} PARENT_SCOPE)
 
 # lib Thread Pool
 add_subdirectory(libTimer)
+set(LIBTIMER_INCLUDE_DIR ${LIBTIMER_INCLUDE_DIR} PARENT_SCOPE)
 
 # lib Program Config
 add_subdirectory(libCFG)
 add_dependencies(libCFG libmmv)
+set(LIBCFG_INCLUDE_DIR ${LIBCFG_INCLUDE_DIR} PARENT_SCOPE)
